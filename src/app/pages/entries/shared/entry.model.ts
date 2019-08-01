@@ -1,5 +1,4 @@
 import { Category } from '../../categories/shared/category.model';
-import { prependOnceListener } from 'cluster';
 
 export class Entry{
     constructor(
