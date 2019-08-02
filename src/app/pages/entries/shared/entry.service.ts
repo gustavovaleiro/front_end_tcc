@@ -38,13 +38,13 @@ export class EntryService {
       const entries: Entry[] =[];
       
       jsonData.forEach(element => {
-        entries.push(element as Entry)
+        entries.push(Object.assign(new Entry(), element ));
       });
       return entries;
    }
 
    private jsonDataToEntry(jsonData: any): Entry{
-     return jsonData as Entry;
+     return Object.assign(new Entry(), jsonData );
    }
   
    create(entry: Entry): Observable<Entry>{
