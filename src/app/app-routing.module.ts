@@ -5,7 +5,8 @@ import { CategoriesModule } from './pages/categories/categories.module';
 
 const routes: Routes = [
   {path: "entries", loadChildren: "./pages/entries/entries.module#EntriesModule"},
-  {path: "categories", loadChildren: "./pages/categories/categories.module#CategoriesModule"}
+  {path: "categories", loadChildren: "./pages/categories/categories.module#CategoriesModule"},
+  {path: "reports", loadChildren: "./pages/reports/reports.module#ReportsModule"}
 ];
 
 @NgModule({
