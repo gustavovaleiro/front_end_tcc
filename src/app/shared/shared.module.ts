@@ -11,7 +11,9 @@ import { FormFieldErrorComponent } from './components/form-field-error/form-fiel
 @NgModule({
   declarations: [
     BreadCrumbComponent, 
-    PageHeaderComponent, FormFieldErrorComponent],
+    PageHeaderComponent,
+    FormFieldErrorComponent
+    ],
   imports: [
     CommonModule,
     ReactiveFormsModule,
@@ -23,7 +25,8 @@ import { FormFieldErrorComponent } from './components/form-field-error/form-fiel
     RouterModule,
 
     BreadCrumbComponent,
-    PageHeaderComponent
+    PageHeaderComponent,
+    FormFieldErrorComponent
   ]
 })
 export class SharedModule { }
