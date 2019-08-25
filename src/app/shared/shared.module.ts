@@ -28,6 +28,7 @@ import { ServerErrorMessageComponent } from './components/server-error-message/s
 
     BreadCrumbComponent,
     PageHeaderComponent,
+    FormFieldErrorComponent,
     ServerErrorMessageComponent
   ]
 })
