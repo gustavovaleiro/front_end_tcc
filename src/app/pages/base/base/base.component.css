@@ -1,0 +1,17 @@
+.base-container{
+    margin: 16px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    height: 100%;
+}
+.placeholder-container{
+    margin-top:16px;
+}
+
+.menu{
+    max-width: 256px;
+    height: 100%;
+}
+.row{
+    height: 100%;
+}

@@ -7,6 +7,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { InMemoryDatabase } from '../in-memory-database';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { StorageService } from './services/storage.service';
+import {  AuthInterceptorProvider } from './interceptors/auth.interceptor';
 
 
 
@@ -15,18 +17,18 @@ import { NavbarComponent } from './components/navbar/navbar.component';
     NavbarComponent,
   ],
   imports: [
-    CommonModule,
-    BrowserModule,
-    BrowserAnimationsModule,
     HttpClientModule,
     RouterModule,
-    HttpClientInMemoryWebApiModule.forRoot(InMemoryDatabase)   
+
+   // HttpClientInMemoryWebApiModule.forRoot(InMemoryDatabase)   
   ],
   exports:[
-    BrowserModule,
-    BrowserAnimationsModule,
     HttpClientModule,
-    NavbarComponent
+    NavbarComponent,
+  ],
+  providers: [
+    AuthInterceptorProvider,
+    StorageService
   ]
 })
 export class CoreModule { }

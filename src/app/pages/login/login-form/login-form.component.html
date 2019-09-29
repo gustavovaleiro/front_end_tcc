@@ -1,0 +1,49 @@
+
+<div class="background_full">
+    <div class="background_center">
+      <div class="component">
+        <form [formGroup]="resourceForm"(submit)="login()" >
+            <div class="cardcontainer">
+                <div class="card ">
+                    <div class="card-header text-center blue-header-gradient">
+                        <h3>FEASY WEB - LOGIN</h3>
+                    </div>
+            
+                    <div class="card-body">
+                        <div class="form-group row">
+                            <div class=" input input-user">
+                                    <input type="text" class="form-control" placeholder="Usuario" id="login"formControlName="login">
+                                    <app-form-field-error [form-control] = "resourceForm.get('login')"></app-form-field-error>
+                            </div>
+                        </div>
+        
+                        <div class="form-group row">
+                                <div class="input input-password">
+                                    <input type="password" placeholder="Senha" class="form-control" id="password"formControlName="password">
+                                    <app-form-field-error [form-control] = "resourceForm.get('password')"></app-form-field-error>
+                                </div>
+                        </div>
+                        <app-server-error-message [server-error-messages] = "serverErrorMessages"></app-server-error-message>
+                        <div class="btn-div">
+                                <button button [disabled] ="submittingForm || resourceForm.invalid" type="submit" class="btn btn-success btn-lg btn-block  ">Entrar</button>
+                            </div>
+                    </div>
+                    <div class="text-center links-rodape-login">
+                        <a href="#">Esqueceu sua senha?</a> <br>
+                        É novo por aqui? <a href="#">Crie sua conta</a>
+                    </div>
+                   
+                    
+                </div>
+              
+        
+            </div>
+        </form>
+      </div>
+    </div>
+  </div>
+    
+
+
+
+

@@ -1,13 +1,16 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { CategoriesModule } from './pages/categories/categories.module';  
+import { BaseComponent } from './pages/base/base/base.component';
 
 
 const routes: Routes = [
-  {path: "entries", loadChildren: "./pages/entries/entries.module#EntriesModule"},
-  {path: "categories", loadChildren: "./pages/categories/categories.module#CategoriesModule"},
-  {path: "reports", loadChildren: "./pages/reports/reports.module#ReportsModule"},
-  {path: "", redirectTo: '/reports', pathMatch: 'full'}
+  {path: "login", loadChildren: "./pages/login/login.module#LoginModule"},
+  {path: "", redirectTo: '/login', pathMatch: 'full'},
+  {path: 'home', component: BaseComponent},
+  
+  
+  
 ];
 
 @NgModule({

@@ -1,1 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
+.blue-header-gradient{
+    background: linear-gradient(90deg, rgba(0,123,255,1) 27%, rgba(12,60,232,1) 99%);
+    color: white;
+}
+
+.my-container{
+    max-width: 1280px;
+    margin: 0 auto;
+}
+
