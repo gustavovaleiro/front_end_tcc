@@ -1,4 +1,78 @@
+.first-row{
+   
+}
+.c{
+    max-height: 52px;
+}
+.row{
+    padding-bottom: 0px;
+    
+    width: 100%;
+    max-width: 1280px;
+    margin: 0 auto;
+}
 .navbar{
-    height: 68px;
-    box-sizing: content-box;
+
+    max-height: 68px !important;
+    box-sizing: border-box;
+}
+
+h1{
+    position: absolute;
+    bottom: 0;
+    margin: 0;
+}
+.navbar-brand{
+    padding: 0px !important;
+    margin:0px;
+
+}
+
+.header-icons{
+    padding:0px;
+}
+
+
+.icons-ul{
+    max-height: 68px;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+
+.header-notification{
+ 
+}
+
+.header-setting{
+
+}
+
+
+ul{
+    margin: 0px;
+}
+ul li {
+    display:inline;
+    margin: 0px;
+    margin-right: 8px;
+}
+.header-person{
+    padding:0px;
+}
+.coluna-person-img{
+    padding:0px !important;
+}
+.person-img{
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+}
+.person-identification-container{
+    width: fit-content;
+    margin: 0 auto;
+}
+.person-expirate{
+    width: fit-content;
+    margin: 0 auto;
 }

@@ -9,12 +9,14 @@ import { InMemoryDatabase } from '../in-memory-database';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { StorageService } from './services/storage.service';
 import {  AuthInterceptorProvider } from './interceptors/auth.interceptor';
+import { SideNavMenuComponent } from './components/side-nav-menu/side-nav-menu.component';
 
 
 
 @NgModule({
   declarations: [
     NavbarComponent,
+    SideNavMenuComponent,
   ],
   imports: [
     HttpClientModule,
@@ -25,6 +27,7 @@ import {  AuthInterceptorProvider } from './interceptors/auth.interceptor';
   exports:[
     HttpClientModule,
     NavbarComponent,
+    SideNavMenuComponent
   ],
   providers: [
     AuthInterceptorProvider,
