@@ -3,3 +3,4 @@ export interface LocalUser{
     usuario: string;
     permissoes: Array<String>
 }
+

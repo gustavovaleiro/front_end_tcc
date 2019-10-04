@@ -10,6 +10,10 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { StorageService } from './services/storage.service';
 import {  AuthInterceptorProvider } from './interceptors/auth.interceptor';
 import { SideNavMenuComponent } from './components/side-nav-menu/side-nav-menu.component';
+import {MatTreeModule} from '@angular/material/tree';
+import {MatButtonModule} from '@angular/material/button';
+import {MatIconModule} from '@angular/material/icon';
+import { NavTreeComponent } from './components/side-nav-menu/nav-tree/nav-tree.component';
 
 
 
@@ -17,11 +21,15 @@ import { SideNavMenuComponent } from './components/side-nav-menu/side-nav-menu.c
   declarations: [
     NavbarComponent,
     SideNavMenuComponent,
+    NavTreeComponent,
   ],
   imports: [
+    CommonModule,
     HttpClientModule,
     RouterModule,
-
+    MatTreeModule,
+    MatIconModule,
+    MatButtonModule,
    // HttpClientInMemoryWebApiModule.forRoot(InMemoryDatabase)   
   ],
   exports:[

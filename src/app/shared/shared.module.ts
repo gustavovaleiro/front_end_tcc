@@ -9,17 +9,19 @@ import { ServerErrorMessageComponent } from './components/server-error-message/s
 
 
 
+
 @NgModule({
   declarations: [
     BreadCrumbComponent, 
     PageHeaderComponent,
     FormFieldErrorComponent,
     ServerErrorMessageComponent,
+
   ],
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    RouterModule
+    RouterModule,
   ],
   exports:[
     CommonModule,
