@@ -6,6 +6,7 @@ import { RouterModule } from '@angular/router';
 import { PageHeaderComponent } from './components/page-header/page-header.component';
 import { FormFieldErrorComponent } from './components/form-field-error/form-field-error.component';
 import { ServerErrorMessageComponent } from './components/server-error-message/server-error-message.component';
+import { DashComponent } from '../pages/dashboard/dash/dash.component';
 
 
 
@@ -16,6 +17,7 @@ import { ServerErrorMessageComponent } from './components/server-error-message/s
     PageHeaderComponent,
     FormFieldErrorComponent,
     ServerErrorMessageComponent,
+
 
   ],
   imports: [
@@ -31,7 +33,8 @@ import { ServerErrorMessageComponent } from './components/server-error-message/s
     BreadCrumbComponent,
     PageHeaderComponent,
     FormFieldErrorComponent,
-    ServerErrorMessageComponent
+    ServerErrorMessageComponent,
+  
   ]
 })
 export class SharedModule { }

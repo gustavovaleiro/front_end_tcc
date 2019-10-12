@@ -1,6 +1,6 @@
 <div *ngIf="concluido">
 
-  <mat-tree class = "arvore"  [dataSource]="dataSource" [treeControl]="treeControl" style = "height: 100%">
+  <mat-tree class = "arvore menu-background-color"  [dataSource]="dataSource" [treeControl]="treeControl" style = "height: 100%">
    
     <!-- This is the tree node template for leaf nodes -->
     <mat-tree-node class = "no no-naoexpandivel"  *matTreeNodeDef="let node" matTreeNodePadding matTreeNodePaddingIndent="12px">
@@ -9,9 +9,9 @@
       {{node.name}}
     </mat-tree-node>
     <!-- This is the tree node template for expandable nodes  -->
-    <mat-tree-node class = "no no-expandivel" *matTreeNodeDef="let node;when: hasChild" matTreeNodePadding matTreeNodePaddingIndent="12px">
-      <button mat-icon-button matTreeNodeToggle
-              [attr.aria-label]="'toggle ' + node.name">
+    <mat-tree-node matTreeNodeToggle
+    [attr.aria-label]="'toggle ' + node.name" class = "no no-expandivel" *matTreeNodeDef="let node;when: hasChild" matTreeNodePadding matTreeNodePaddingIndent="12px">
+      <button mat-icon-button >
         <mat-icon class="mat-icon-rtl-mirror">
           {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
         </mat-icon>

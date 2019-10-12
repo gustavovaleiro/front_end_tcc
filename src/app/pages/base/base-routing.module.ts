@@ -4,9 +4,10 @@ import { BaseComponent } from './base/base.component';
 
 
 const routes: Routes = [ {path: '', component: BaseComponent, children:[
-                            {path: "categories", loadChildren: "../categories/categories.module#CategoriesModule"}
+                            {path: "dash", loadChildren:"../dashboard/dashboard.module#DashboardModule"},
+                            {path: "pessoal", loadChildren: "../pessoal/pessoa/pessoa.module#PessoaModule"}
                           ]},
-                            
+                        
                         ];
 
 @NgModule({

@@ -1,0 +1,23 @@
+.btn-group{
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+}
+.col-tipo{
+    
+}
+
+.btn-tipo{
+  margin-bottom: 16px;
+   
+}
+
+.divider{
+    margin-left: 12px;
+    margin-right: 12px;
+    border-bottom: 1px solid #ddd;
+}
+
+.pessoa-fisica{
+    margin-top: 20px;
+}

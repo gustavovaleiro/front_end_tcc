@@ -1,0 +1,119 @@
+<app-bread-crumb 
+     [items]="[{text: 'Categorias', link: '/categories'},
+               {text: pageTitle}]">
+</app-bread-crumb>
+
+<app-page-header
+    [page-title]= "pageTitle"
+    button-text = "<< Voltar"
+    button-link = "/categories"
+    button-class = "btn-light"
+></app-page-header>
+
+<form [formGroup]="resourceForm"(submit)="submitForm()">
+
+    <div class="card">
+        <div class="card-header header-bluegray">
+            Informações pessoais
+        </div>
+        <div class="card-body">
+            <div class="form-row">
+                <div class="col-tipo form-label-group col-md-12">
+                    <div class="btn-group">
+                        <label [class.btn-primary] = "resourceForm.get('tipo').value == 'PESSOA_FISICA'" [class.btn-outline-primary] = "resourceForm.get('tipo').value != 'PESSOA_FISICA'"  class = "btn btn-lg btn-tipo" (click)="resourceForm.get('tipo').setValue('PESSOA_FISICA')">Pessoa Física</label>
+                        <label [class.btn-primary] = "resourceForm.get('tipo').value == 'PESSOA_JURIDICA'"  [class.btn-outline-primary] = "resourceForm.get('tipo').value != 'PESSOA_JURIDICA'"class = "btn btn-lg btn-tipo " (click)="resourceForm.get('tipo').setValue('PESSOA_JURIDICA')">Pessoa Jurídica</label>
+                    </div>
+                </div>
+                <app-form-field-error [form-control] = "resourceForm.get('tipo')"></app-form-field-error>
+            </div> <!--Fim da primeira linha-->
+
+            <div class="divider"></div>
+            <div class="pessoa-info pessoa-fisica" *ngIf="resourceForm.get('tipo').value == 'PESSOA_FISICA'">
+                <div class="row">
+                    <div class="col-md-4 col-cpf">
+                        <label for="CPF">CPF</label>
+                        <input type="text" class="form-control" id="CPF"formControlName="CPF">
+                        <app-form-field-error [form-control] = "resourceForm.get('CPF')"></app-form-field-error>
+                    </div>
+                    <div class="col-md-8 col-nome">
+                        <label for="nome">Nome</label>
+                        <input type="text" class="form-control" id="nome"formControlName="nome">
+                        <app-form-field-error [form-control] = "resourceForm.get('nome')"></app-form-field-error>
+                    </div>
+                </div> <!--Fim da primeira linha de pessoa fisica-->
+                <div class="row">
+                    <div class="col-md-3 col-datanascimento">
+                            <label for="dataNascimento">Data de Nascimento</label>
+                            <br>
+                            <p-calendar
+                            id = "dataNascimento"
+                            formControlName="dataNascimento"
+                            inputStyleClass="form-control"
+                            dataType="string"
+                            dateFormat="dd/mm/yy"
+                            [locale]="ptBR"
+                            [showButtonBar]=true>
+                            </p-calendar>
+                            <app-form-field-error [form-control] = "resourceForm.get('dataNascimento')"></app-form-field-error>
+                    </div>
+
+                    <div class="col-md-3 col-nacionalidade">
+                        <label for="nacionalidade">Nacionalidade</label>
+                        <input type="text" class="form-control" id="nacionalidade"formControlName="nacionalidade">
+                        <app-form-field-error [form-control] = "resourceForm.get('nacionalidade')"></app-form-field-error>
+                    </div>
+                    <div class="col-md-2 col-naturalidade-uf">
+                        <label for="uf">Naturalidade</label>
+                        <select name="uf" id="uf" formControlName="uf" class =  "form-control">
+                            <option *ngFor= "let uf of estados" [value]="uf.uf">{{uf.nome}}</option>
+                        </select>
+                        <app-form-field-error [form-control] = "resourceForm.get('uf')"></app-form-field-error>
+                    </div>
+                    <div class="col md-4 col-naturalidade-cidade">
+                        <mat-form-field >
+                            <input type="text" placeholder="Pick one" aria-label="Number" matInput [formControl]="resourceForm.get('naturalidade')" [matAutocomplete]="auto">
+                            <mat-autocomplete #auto="matAutocomplete">
+                                <mat-option *ngFor="let cidade of cidaddes" [value]="option">
+                                {{option}}
+                                </mat-option>
+                            </mat-autocomplete>
+                        </mat-form-field>
+                    </div>
+
+                </div> <!--Fim da primeira linha de pessoa juridica-->
+
+            </div>
+
+      
+
+               
+               
+        </div>
+
+        <div class="card-header header-bluegray">
+            Contatos
+        </div>
+        <div class="card-body">
+
+        </div>
+
+        <div class="card-header header-bluegray">
+            Endereço
+        </div>
+        <div class="card-body">
+
+        </div>
+
+
+
+    
+    </div>
+    
+    <app-server-error-message [server-error-messages] = "serverErrorMessages"></app-server-error-message>
+
+
+    <div style="width: fit-content;margin: 0 auto">
+        <button [disabled] ="submittingForm || resourceForm.invalid" type="submit"  class = "btn btn-primary btn-lg mt-2 " >Salvar</button>
+    </div>
+
+</form>

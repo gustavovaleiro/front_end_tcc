@@ -1,0 +1,21 @@
+.card{
+    width: 100%;
+    max-width: 100%;
+    margin: 8px;
+}
+.card-body{
+
+}
+.card-header{
+    background: white;
+    color: #009FE0 ;
+}
+
+h2{
+    margin-bottom: 0px;
+}
+.container{
+    margin: 10px;
+    margin-top: 32px;
+    
+}

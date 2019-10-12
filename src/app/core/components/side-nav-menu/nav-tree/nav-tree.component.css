@@ -1,24 +1,26 @@
 .arvore{
-    border: 1px solid #323232;
+    border-bottom: 1px solid #575787;
+    border-top: 1px solid #575787;
 }
 .no{
-    background-color:white !important;
+  
    min-height: 20px!important;
-    max-height: 32px!important;
+    max-height: 38px!important;
 }
 .no:hover{
-    background-color: #f1f1f1!important;
-    color:#020202;
+    background: #007bff;
+    color:white;
 }
 .no-expandivel{
-    color: #323232;
+    color: #343464;
     font-weight: 700!important;
-
+  
 }
 
 .no-naoexpandivel{
-    color: #525252;
+    color: #446;
     font-weight: 500!important;
-   
-    
+
 }
+
+

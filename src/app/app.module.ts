@@ -12,6 +12,7 @@ import { SharedModule } from './shared/shared.module';
 import { LoginModule } from './pages/login/login.module';
 import { BaseComponent } from './pages/base/base/base.component';
 import { BaseModule } from './pages/base/base.module';
+import { CalendarModule } from 'primeng/calendar';
 
 
 @NgModule({

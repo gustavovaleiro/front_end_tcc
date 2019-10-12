@@ -1,8 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
 @import 'https://fonts.googleapis.com/icon?family=Material+Icons';
 .blue-header-gradient{
-    background: linear-gradient(90deg, rgba(0,123,255,1) 27%, rgba(12,60,232,1) 99%);
-    color: white;
+    background: linear-gradient(90deg, rgba(12,60,232,1) 27%, rgba(0,123,255,1) 99%)!important;
+    color: white!important;
 }
 
 .my-container{
@@ -13,3 +13,34 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+.text-light{
+    color:#222;
+}
+
+
+.text-dark{
+    color:#fefefe !important;
+}
+
+.menu-background-color{
+    background: #eaeaef !important;
+}
+
+.body-background-color{
+    background: rgb(132,135,149);
+    background: linear-gradient(to top, rgba(142,147,182,1) 85%, rgba(5,30,201,1) 85%);
+
+
+}
+
+.card-header{
+   
+}
+
+.header-bluegray{
+    background: #fafafa !important ;
+    color: #446;
+    font-weight: bold;
+}
