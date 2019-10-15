@@ -1,0 +1,9 @@
+<mat-form-field >
+        <input type="text" [placeholder]="label" aria-label="Number" matInput [formControl]="ufFormControl" [matAutocomplete]="auto" autocomplete="off">
+        <mat-autocomplete #auto="matAutocomplete"  [displayWith]="displayFn">
+            <mat-option *ngFor="let option of estadosFiltrados | async" [value]="option">
+            {{option.uf + ' - ' + option.nome}}
+            </mat-option>
+        </mat-autocomplete>
+        <mat-error>{{getErrorMessage()}}</mat-error>
+</mat-form-field>

@@ -34,7 +34,7 @@ export class PessoaFisica extends Pessoa{
 	public dataNascimento?: Date,
 	public rG?: RG,
 	public nacionalidade?: string,
-	public naturalidade?: Cidade,
+	public naturalidade?: Cidade, 
     ){
         super();
         super.tipo = TipoPessoa.PESSOAFISICA;

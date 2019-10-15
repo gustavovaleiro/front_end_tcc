@@ -4,10 +4,6 @@ import {CalendarModule, Calendar} from 'primeng/calendar';
 import { PessoaRoutingModule } from './pessoa-routing.module';
 import { CategoryFormComponent } from './pessoa-form/category-form.component';
 import { SharedModule } from 'src/app/shared/shared.module';
-import {  ReactiveFormsModule } from '@angular/forms';
-import {MatAutocompleteModule} from '@angular/material/autocomplete';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import {MatInputModule} from '@angular/material';
 
 
 @NgModule({
@@ -15,10 +11,7 @@ import {MatInputModule} from '@angular/material';
   imports: [
     SharedModule,
     PessoaRoutingModule,
-    CalendarModule,
-    MatAutocompleteModule,
-    MatFormFieldModule,
-    MatInputModule,
+
     
     
   ],

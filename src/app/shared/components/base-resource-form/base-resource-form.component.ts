@@ -1,6 +1,6 @@
 import {  OnInit, AfterContentChecked, Injector } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router'
-import { FormGroup, FormBuilder, Validators } from "@angular/forms"
+import { FormGroup, FormBuilder, Validators, FormControl } from "@angular/forms"
 
 import { switchMap } from 'rxjs/operators'
 import toastr from "toastr"
@@ -119,4 +119,37 @@ export abstract class BaseResourceFormComponent<T extends BaseResourceModel> imp
     }
 
     protected abstract buildResourceForm(): void;
+
+    // ERROS
+    public  getErrorMessage(formControl: FormControl): string {
+        if( this.mustShowErrorMessage(formControl) )
+          return this._getErrorMessage(formControl);
+        else
+          return null;
+      }
+    
+    
+      private mustShowErrorMessage(formControl: FormControl): boolean {
+        return formControl.invalid && formControl.touched
+      }
+    
+      private _getErrorMessage(formControl: FormControl): string | null {
+        if( formControl.errors.required )
+          return "Dado obrigatório";
+    
+        else if( formControl.errors.email)
+          return "Formato de email inválido"
+    
+        else if( formControl.errors.minlength){
+          const requiredLength = formControl.errors.minlength.requiredLength;
+          return `Deve ter no mínimo ${requiredLength} caracteres`;
+        }
+    
+        else if( formControl.errors.maxlength){
+          const requiredLength = formControl.errors.maxlength.requiredLength;
+          return `Deve ter no máximo ${requiredLength} caracteres`;
+        }
+      }
+
+      //FIM - ERROS
 }

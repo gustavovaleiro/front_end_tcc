@@ -10,18 +10,18 @@
     button-class = "btn-light"
 ></app-page-header>
 
-<form [formGroup]="resourceForm"(submit)="submitForm()">
+<form [formGroup]="resourceForm"(submit)="submitForm()" autocomplete="off">
 
     <div class="card">
-        <div class="card-header header-bluegray">
+        <div class="card-header sub-header-white">
             Informações pessoais
         </div>
         <div class="card-body">
             <div class="form-row">
                 <div class="col-tipo form-label-group col-md-12">
                     <div class="btn-group">
-                        <label [class.btn-primary] = "resourceForm.get('tipo').value == 'PESSOA_FISICA'" [class.btn-outline-primary] = "resourceForm.get('tipo').value != 'PESSOA_FISICA'"  class = "btn btn-lg btn-tipo" (click)="resourceForm.get('tipo').setValue('PESSOA_FISICA')">Pessoa Física</label>
-                        <label [class.btn-primary] = "resourceForm.get('tipo').value == 'PESSOA_JURIDICA'"  [class.btn-outline-primary] = "resourceForm.get('tipo').value != 'PESSOA_JURIDICA'"class = "btn btn-lg btn-tipo " (click)="resourceForm.get('tipo').setValue('PESSOA_JURIDICA')">Pessoa Jurídica</label>
+                        <div (click) = "togglePessoaFisica()" [class.btn-primary] = "resourceForm.get('tipo').value == 'PESSOA_FISICA'" [class.btn-outline-primary] = "resourceForm.get('tipo').value != 'PESSOA_FISICA'"  class = "btn btn-lg btn-tipo" (click)="resourceForm.get('tipo').setValue('PESSOA_FISICA')">Pessoa Física</div>
+                        <div (click) = "togglePessoaJuridica()"[class.btn-primary] = "resourceForm.get('tipo').value == 'PESSOA_JURIDICA'"  [class.btn-outline-primary] = "resourceForm.get('tipo').value != 'PESSOA_JURIDICA'"class = "btn btn-lg btn-tipo " (click)="resourceForm.get('tipo').setValue('PESSOA_JURIDICA')">Pessoa Jurídica</div>
                     </div>
                 </div>
                 <app-form-field-error [form-control] = "resourceForm.get('tipo')"></app-form-field-error>
@@ -31,81 +31,113 @@
             <div class="pessoa-info pessoa-fisica" *ngIf="resourceForm.get('tipo').value == 'PESSOA_FISICA'">
                 <div class="row">
                     <div class="col-md-4 col-cpf">
-                        <label for="CPF">CPF</label>
-                        <input type="text" class="form-control" id="CPF"formControlName="CPF">
-                        <app-form-field-error [form-control] = "resourceForm.get('CPF')"></app-form-field-error>
-                    </div>
+                            <mat-form-field>
+                                <input matInput placeholder="CPF" [formControl]="resourceForm.get('CPF')">
+                                <mat-error >{{getErrorMessage(resourceForm.get('CPF'))}}</mat-error>
+                            </mat-form-field>
+                        </div>
                     <div class="col-md-8 col-nome">
-                        <label for="nome">Nome</label>
-                        <input type="text" class="form-control" id="nome"formControlName="nome">
-                        <app-form-field-error [form-control] = "resourceForm.get('nome')"></app-form-field-error>
+                        <mat-form-field>
+                            <input matInput placeholder="Nome" [formControl]="resourceForm.get('nome')">
+                            <mat-error >{{getErrorMessage(resourceForm.get('nome'))}}</mat-error>
+                        </mat-form-field>
                     </div>
                 </div> <!--Fim da primeira linha de pessoa fisica-->
                 <div class="row">
                     <div class="col-md-3 col-datanascimento">
-                            <label for="dataNascimento">Data de Nascimento</label>
-                            <br>
-                            <p-calendar
-                            id = "dataNascimento"
-                            formControlName="dataNascimento"
-                            inputStyleClass="form-control"
-                            dataType="string"
-                            dateFormat="dd/mm/yy"
-                            [locale]="ptBR"
-                            [showButtonBar]=true>
-                            </p-calendar>
-                            <app-form-field-error [form-control] = "resourceForm.get('dataNascimento')"></app-form-field-error>
-                    </div>
-
-                    <div class="col-md-3 col-nacionalidade">
-                        <label for="nacionalidade">Nacionalidade</label>
-                        <input type="text" class="form-control" id="nacionalidade"formControlName="nacionalidade">
-                        <app-form-field-error [form-control] = "resourceForm.get('nacionalidade')"></app-form-field-error>
-                    </div>
-                    <div class="col-md-2 col-naturalidade-uf">
-                        <label for="uf">Naturalidade</label>
-                        <select name="uf" id="uf" formControlName="uf" class =  "form-control">
-                            <option *ngFor= "let uf of estados" [value]="uf.uf">{{uf.nome}}</option>
-                        </select>
-                        <app-form-field-error [form-control] = "resourceForm.get('uf')"></app-form-field-error>
-                    </div>
-                    <div class="col md-4 col-naturalidade-cidade">
-                        <mat-form-field >
-                            <input type="text" placeholder="Pick one" aria-label="Number" matInput [formControl]="resourceForm.get('naturalidade')" [matAutocomplete]="auto">
-                            <mat-autocomplete #auto="matAutocomplete">
-                                <mat-option *ngFor="let cidade of cidaddes" [value]="option">
-                                {{option}}
-                                </mat-option>
-                            </mat-autocomplete>
+                        <mat-form-field>
+                            <input matInput [matDatepicker]="dp" placeholder="Data de Nascimento" [formControl]="resourceForm.get('dataNascimento')">
+                            <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
+                            <mat-datepicker #dp></mat-datepicker>
+                            <mat-error >{{getErrorMessage(resourceForm.get('dataNascimento'))}}</mat-error>
                         </mat-form-field>
                     </div>
 
-                </div> <!--Fim da primeira linha de pessoa juridica-->
+                    <div class="col-md-3 col-nacionalidade">
+                        <mat-form-field>
+                            <input matInput placeholder="Nacionalidade" [formControl]="resourceForm.get('nacionalidade')">
+                            <mat-error >{{getErrorMessage(resourceForm.get('nacionalidade'))}}</mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-6 col-naturalidade">
+                        <app-cidade-selector 
+                        [ufFormControl] = "resourceForm.get('naturalidade.estado')"   
+                        [cidadeFormControl] = "resourceForm.get('naturalidade.nome')"></app-cidade-selector>
+                        
+                    </div>
 
+                </div> <!--Fim da segunda linha de pessoa fisica-->
+                <div class="row">
+                    <div class="col-md-4 col-rg-emissor">
+                        <mat-form-field>
+                            <input matInput placeholder="RG Emissor" [formControl]="resourceForm.get('rG.emissor')">
+                            <mat-error >{{getErrorMessage(resourceForm.get('rG.emissor'))}}</mat-error>
+                            <mat-hint>Sem o estado</mat-hint>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-3 col-rg-uf">
+                        <app-uf-selector [ufFormControl] = "resourceForm.get('rG.uf')" label = "Emissor UF"></app-uf-selector>
+                    </div>
+                    <div class="col-md-5 col-rg-numero">
+                        <mat-form-field>
+                            <input matInput placeholder="RG Número" [formControl]="resourceForm.get('rG.rg')">
+                            <mat-error >{{getErrorMessage(resourceForm.get('rG.rg'))}}</mat-error>
+                        </mat-form-field>
+                    </div>
+                </div> <!--Fim da terceira linha de pessoa fisica-->
+            </div><!--Fim de pessoa fisica-->
+            <div class="pessoa-info pessoa-juridica" *ngIf="resourceForm.get('tipo').value == 'PESSOA_JURIDICA'">
+                <div class="row">
+                    <div class="col-md-6 col-cnpj">
+                        <mat-form-field>
+                            <input matInput placeholder="CNPJ" [formControl]="resourceForm.get('CNPJ')">
+                            <mat-error >{{getErrorMessage(resourceForm.get('CNPJ'))}}</mat-error>
+                        </mat-form-field> 
+                    </div>
+                    <div class="col-md-6 col-nome-fantasia">
+                        <mat-form-field>
+                            <input matInput placeholder="Nome Fantasia" [formControl]="resourceForm.get('nome')">
+                            <mat-error >{{getErrorMessage(resourceForm.get('nome'))}}</mat-error>
+                        </mat-form-field>   
+                    </div>
+                </div><!--Fim da primeira linha de pessoa juridica-->
+                <div class="row">
+                    <div class="col-md-4 col-razao-social">
+                        <mat-form-field>
+                            <input matInput placeholder="Razao Social" [formControl]="resourceForm.get('razaoSocial')">
+                            <mat-error >{{getErrorMessage(resourceForm.get('razaoSocial'))}}</mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-4 col-inscricao-estadual">
+                        <mat-form-field>
+                            <input matInput placeholder="Inscrição Estadual" [formControl]="resourceForm.get('inscricaoEstadual')">
+                            <mat-error >{{getErrorMessage(resourceForm.get('inscricaoEstadual'))}}</mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-4 col-inscricao-municipal">
+                        <mat-form-field>
+                            <input matInput placeholder="Inscrição Municipal" [formControl]="resourceForm.get('inscricaoMunicipal')">
+                            <mat-error >{{getErrorMessage(resourceForm.get('inscricaoMunicipal'))}}</mat-error>
+                        </mat-form-field>
+                    </div>
+                </div> <!--Fim da segunda linha de pessoa juridica-->
             </div>
-
-      
-
-               
                
         </div>
 
-        <div class="card-header header-bluegray">
-            Contatos
+        <div class="card-header sub-header-white">
+            Contatos 
         </div>
         <div class="card-body">
 
         </div>
 
-        <div class="card-header header-bluegray">
+        <div class="card-header sub-header-white">
             Endereço
         </div>
         <div class="card-body">
 
         </div>
-
-
-
     
     </div>
     
@@ -116,4 +148,5 @@
         <button [disabled] ="submittingForm || resourceForm.invalid" type="submit"  class = "btn btn-primary btn-lg mt-2 " >Salvar</button>
     </div>
 
+    {{resourceForm.value | json}}
 </form>

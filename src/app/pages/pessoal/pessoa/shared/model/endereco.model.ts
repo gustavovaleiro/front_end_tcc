@@ -17,6 +17,7 @@ export class Cidade extends BaseResourceModel {
 }
 
 export class Estado extends BaseResourceModel {
-    nome: string;
-    uf: string;
+    id?: number;
+    nome?: string;
+    uf?: string; 
 }

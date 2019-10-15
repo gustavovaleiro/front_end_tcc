@@ -80,7 +80,9 @@
     background: url(../../../../assets/background.jpg) #000 no-repeat center;
 }
 
-
+mat-form-field{
+    width: 100%;
+}
     .background_full::before {
         content: "";
         position: absolute;

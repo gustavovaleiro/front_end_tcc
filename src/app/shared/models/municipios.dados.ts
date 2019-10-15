@@ -2,7 +2,7 @@
 export interface EstadoBase {
     sigla: string;
     nome: string;
-    cidades: string[];
+    cidades?: string[];
 }
 
 export const ESTADOS: EstadoBase[] = 
