@@ -1,0 +1,27 @@
+<app-sub-header-form titulo="Telefone(s)" botaoTexto="+ Telefone" (funcao)="adicionarTelefone($event)"></app-sub-header-form>
+<div class="card-body">
+    <div class="row row-telefone"  *ngFor= "let telefone of telefones.controls; let i = index">
+        <div class="col-md-3 col-tipo">
+           <mat-form-field>
+                <input matInput placeholder="Tipo" [formControl]="telefone.get('tipo')">
+                <mat-error >{{getErrorMessage(telefone.get('tipo'))}}</mat-error>
+            </mat-form-field>  
+        </div>
+        <div class="col-md-2 col-ddd">
+             <mat-form-field>
+                <input matInput placeholder="DDD" [formControl]="telefone.get('ddd')">
+                <mat-error >{{getErrorMessage(telefone.get('ddd'))}}</mat-error>
+            </mat-form-field>    
+        </div>
+        <div class="col-md-6 col-numero">
+            <mat-form-field>
+                <input matInput placeholder="Numero" [formControl]="telefone.get('numero')">
+                <mat-error >{{getErrorMessage(telefone.get('numero'))}}</mat-error>
+            </mat-form-field>  
+        </div>
+        <excluir-complementar-row [index]="i" (callFunction)="excluirTelefone($event)" [disabled]= "telefone.get('principal').value == true"></excluir-complementar-row>
+        <div class="col-md-1 col-excluir">
+         
+        </div>
+    </div>  <!--fim da primeira linha do body do complementar-->
+</div>

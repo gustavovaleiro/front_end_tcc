@@ -10,11 +10,11 @@
     button-class = "btn-light"
 ></app-page-header>
 
-<form [formGroup]="resourceForm"(submit)="submitForm()" autocomplete="off">
+<form [formGroup]="resourceForm"(submit)="teste()" autocomplete="off">
 
     <div class="card">
         <div class="card-header sub-header-white">
-            Informações pessoais
+            <h3>Informações pessoais</h3>
         </div>
         <div class="card-body">
             <div class="form-row">
@@ -122,15 +122,9 @@
                     </div>
                 </div> <!--Fim da segunda linha de pessoa juridica-->
             </div>
-               
         </div>
-
-        <div class="card-header sub-header-white">
-            Contatos 
-        </div>
-        <div class="card-body">
-
-        </div>
+        <app-telefone-form [formBuilder]= "formBuilder" [telefones]="resourceForm.get('telefones')" [errorMessage]="errorMessage"></app-telefone-form>
+       
 
         <div class="card-header sub-header-white">
             Endereço

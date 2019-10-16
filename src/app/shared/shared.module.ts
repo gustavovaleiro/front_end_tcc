@@ -9,10 +9,13 @@ import { ServerErrorMessageComponent } from './components/server-error-message/s
 import { DashComponent } from '../pages/dashboard/dash/dash.component';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import {MatInputModule, MatDatepickerModule} from '@angular/material';
+import {MatInputModule, MatDatepickerModule, MatCheckboxModule} from '@angular/material';
 import { CalendarModule } from 'primeng/calendar';
 import { CidadeSelectorComponent } from './components/cidade-selector/cidade-selector.component';
 import { UfSelectorComponent } from './components/cidade-selector/uf-selector/uf-selector.component';
+import { SubHeaderFormComponent } from './components/sub-header-form/sub-header-form.component';
+import { ComplementarFormExcluirComponent } from './components/complementar-form-excluir/complementar-form-excluir.component';
+import { TelefoneFormComponent } from './components/telefone-form/telefone-form.component';
 
 
 
@@ -25,6 +28,9 @@ import { UfSelectorComponent } from './components/cidade-selector/uf-selector/uf
     ServerErrorMessageComponent,
     CidadeSelectorComponent,
     UfSelectorComponent,
+    SubHeaderFormComponent,
+    ComplementarFormExcluirComponent,
+    TelefoneFormComponent,
   ],
   imports: [
     CommonModule,
@@ -45,6 +51,7 @@ import { UfSelectorComponent } from './components/cidade-selector/uf-selector/uf
     MatFormFieldModule,
     MatInputModule,
     MatDatepickerModule,
+    MatCheckboxModule,
     
     BreadCrumbComponent,
     PageHeaderComponent,
@@ -52,6 +59,9 @@ import { UfSelectorComponent } from './components/cidade-selector/uf-selector/uf
     ServerErrorMessageComponent,
     CidadeSelectorComponent,
     UfSelectorComponent,
+    SubHeaderFormComponent,
+    ComplementarFormExcluirComponent,
+    TelefoneFormComponent,
   ]
 })
 export class SharedModule { }

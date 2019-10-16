@@ -1,17 +1,25 @@
 import { Component, Injector, OnInit } from '@angular/core';
 
-import {  Validators, FormArray } from "@angular/forms"
+import {  Validators, FormArray, FormGroup } from "@angular/forms"
 
 import { CategoryService } from '../shared/category.service';
 import { BaseResourceFormComponent } from 'src/app/shared/components/base-resource-form/base-resource-form.component';
 import { PessoaFisica, Pessoa, TipoPessoa } from '../shared/model/pessoa.model';
-
-import { ESTADOS } from 'src/app/shared/models/municipios.dados';
 import {MAT_MOMENT_DATE_FORMATS, MomentDateAdapter} from '@angular/material-moment-adapter';
 import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
-import { Observable, of } from 'rxjs';
-import { startWith, map } from 'rxjs/operators';
 
+
+export const MY_FORMATS = {
+  parse: {
+    dateInput: 'YYYY-MM-DD',
+  },
+  display: {
+    dateInput: 'YYYY-MM-DD',
+    monthYearLabel: 'YYYY',
+    dateA11yLabel: 'LL',
+    monthYearA11yLabel: 'YYYY',
+  },
+};
 @Component({
 
   selector: 'app-category-form',
@@ -22,7 +30,8 @@ import { startWith, map } from 'rxjs/operators';
     {provide: MAT_DATE_LOCALE, useValue: 'pt-BR'},
 
     {provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE]},
-    {provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS}
+    {provide: MAT_DATE_FORMATS, useValue: MY_FORMATS},
+    
   ],
 })
 export class CategoryFormComponent extends BaseResourceFormComponent<Pessoa> implements OnInit {
@@ -39,7 +48,7 @@ export class CategoryFormComponent extends BaseResourceFormComponent<Pessoa> imp
   }
 
   togglePessoaFisica(){
-    super.resourceForm = this.formBuilder.group({
+    this.resourceForm = this.formBuilder.group({
       id: [null],
       tipo: [TipoPessoa.PESSOAFISICA, [Validators.required]],
       nome: [null, [Validators.required, Validators.minLength(8)]],
@@ -56,6 +65,9 @@ export class CategoryFormComponent extends BaseResourceFormComponent<Pessoa> imp
         uf: [null],
         rg: [null]
       }),
+      telefones: this.formBuilder.array([
+      
+      ]),
       endereco: this.formBuilder.array([ // for arrai
         this.createEndereco()
       ])
@@ -63,21 +75,32 @@ export class CategoryFormComponent extends BaseResourceFormComponent<Pessoa> imp
     
     this.endereco.push(this.createEndereco());
   }
+  teste(){
+    console.log( Object.assign(new PessoaFisica(), this.formValue ));
+
+  }
+
+
 
   private createEndereco(): any {
     return this.formBuilder.group({
       rua: [null]
     });
   }
+  
+  
+  
 
   get endereco() {
     return this.resourceForm.get('endereco') as FormArray;
   }
-
+  get formValue(){
+    return this.resourceForm.value;
+  }
 
   togglePessoaJuridica(){
-
-    super.resourceForm = this.formBuilder.group({
+  
+    this.resourceForm = this.formBuilder.group({
       id: [null],
       tipo: [TipoPessoa.PESSOAFISICA, [Validators.required]],
       nome: [null, [Validators.required, Validators.minLength(8)]],
@@ -89,6 +112,8 @@ export class CategoryFormComponent extends BaseResourceFormComponent<Pessoa> imp
   }
   ngOnInit() {
     super.ngOnInit();
+
+   
   }
   protected creationPageTitle():string{
     return "Cadastro de Nova Categoria"; 

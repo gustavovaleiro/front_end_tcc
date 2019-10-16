@@ -6,6 +6,7 @@ import { switchMap } from 'rxjs/operators'
 import toastr from "toastr"
 import { BaseResourceModel } from '../../models/base-resource.model';
 import { BaseResourceService } from '../../services/base-resource.service';
+import { GetErrorMessage } from '../form-field-error/error-message';
 
 
 export abstract class BaseResourceFormComponent<T extends BaseResourceModel> implements OnInit, AfterContentChecked {
@@ -15,6 +16,7 @@ export abstract class BaseResourceFormComponent<T extends BaseResourceModel> imp
     pageTitle: string;
     serverErrorMessages: string[] = null;
     submittingForm: boolean = false;
+    public errorMessage: GetErrorMessage = new GetErrorMessage();
     protected route: ActivatedRoute;
     protected router: Router;
     protected formBuilder: FormBuilder;
@@ -122,34 +124,10 @@ export abstract class BaseResourceFormComponent<T extends BaseResourceModel> imp
 
     // ERROS
     public  getErrorMessage(formControl: FormControl): string {
-        if( this.mustShowErrorMessage(formControl) )
-          return this._getErrorMessage(formControl);
-        else
-          return null;
+       
+       return  this.errorMessage.getErrorMessage(formControl);
       }
     
     
-      private mustShowErrorMessage(formControl: FormControl): boolean {
-        return formControl.invalid && formControl.touched
-      }
     
-      private _getErrorMessage(formControl: FormControl): string | null {
-        if( formControl.errors.required )
-          return "Dado obrigatório";
-    
-        else if( formControl.errors.email)
-          return "Formato de email inválido"
-    
-        else if( formControl.errors.minlength){
-          const requiredLength = formControl.errors.minlength.requiredLength;
-          return `Deve ter no mínimo ${requiredLength} caracteres`;
-        }
-    
-        else if( formControl.errors.maxlength){
-          const requiredLength = formControl.errors.maxlength.requiredLength;
-          return `Deve ter no máximo ${requiredLength} caracteres`;
-        }
-      }
-
-      //FIM - ERROS
 }
