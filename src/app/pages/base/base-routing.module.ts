@@ -5,7 +5,7 @@ import { BaseComponent } from './base/base.component';
 
 const routes: Routes = [ {path: '', component: BaseComponent, children:[
                             {path: "dash", loadChildren:"../dashboard/dashboard.module#DashboardModule"},
-                            {path: "pessoal", loadChildren: "../pessoal/pessoa/pessoa.module#PessoaModule"}
+                            {path: "clientes", loadChildren: "../pessoal/cliente/cliente.module#ClienteModule"}
                           ]},
                         
                         ];

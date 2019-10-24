@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { CategoryFormComponent } from './pessoa-form/category-form.component';
+import { PessoaFormComponent } from './pessoa-form/pessoa-form.component';
 
 
-const routes: Routes = [ {path: 'new', component: CategoryFormComponent},];
+const routes: Routes = [ ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

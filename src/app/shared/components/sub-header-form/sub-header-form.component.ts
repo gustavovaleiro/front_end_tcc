@@ -9,6 +9,7 @@ export class SubHeaderFormComponent implements OnInit {
    @Input() public titulo: string = '';
    @Input() public botaoTexto: string = '';
    @Output() public funcao :EventEmitter<any> = new EventEmitter();
+   @Input() public enable: boolean = true;
   constructor() { }
 
   ngOnInit() {

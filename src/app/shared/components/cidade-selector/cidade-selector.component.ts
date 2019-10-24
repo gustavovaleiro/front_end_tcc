@@ -21,7 +21,8 @@ export class CidadeSelectorComponent implements OnInit {
   
   get cidades(): string[] {
     let a : string[] = [];
-      if(!this.cidadeFormControl.disabled){
+      if(!this.cidadeFormControl.disabled && this.ufFormControl.value != null){
+      
          return this.filterCidadesByEstado(this.ufFormControl.value.nome);
       }
       return a ;
@@ -37,20 +38,27 @@ export class CidadeSelectorComponent implements OnInit {
 
    this.ufFormControl.valueChanges.subscribe(
      (value: EstadoBase) => {
-        
-       if(!this.estadoValido(value.nome)){
-         this.cidadeFormControl.disable();
-         this.cidadeFormControl.setValue('');
-       }else{
-         this.cidadeFormControl.enable(); 
-       }
+       this.toggleEnableDisableField(value);
      }
    )
   }
 
 
+  private toggleEnableDisableField(value: EstadoBase) {
+    if(this.ufFormControl.disabled){
+      this.cidadeFormControl.disable()
+    }
+    else if ( value == null ||  !this.estadoValido(value.nome)) {
+      this.cidadeFormControl.disable();
+      this.cidadeFormControl.setValue('');
+    }
+    else {
+      this.cidadeFormControl.enable();
+    }
+  }
+
  getErrorMessage(){
-  if(this.cidadeFormControl.touched && this.cidadeFormControl.dirty 
+  if(this.cidadeFormControl.touched && this.cidadeFormControl.dirty && this.ufFormControl.disabled  
       && this.cidadeFormControl.value && !this.cidadeValida(this.ufFormControl.value.nome, this.cidadeFormControl.value)){
         this.cidadeFormControl.setErrors({'incorrect': true});
         return "Escolha uma cidade valida!"
@@ -66,7 +74,7 @@ private cidadeValida(estado: string, cidade: string):boolean{
 }
 
   private _filterCidades(value: string): string[] {
-
+    
     if(value!=null){
       const filterValue = value.toLowerCase();
       return this.cidades.filter(cidade => cidade.toLowerCase().startsWith(filterValue));

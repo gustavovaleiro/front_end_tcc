@@ -1,6 +1,7 @@
 import { BaseResourceModel } from 'src/app/shared/models/base-resource.model';
 
 export class Endereco extends BaseResourceModel{
+    id: number;
     rua: string;
     bairro: string;
     cidade: Cidade;

@@ -1,0 +1,32 @@
+<app-bread-crumb 
+     [items]="[{text: 'Clientes', link: '/clientes'},
+               {text: pageTitle}]">
+</app-bread-crumb>
+
+<app-page-header
+    [page-title]= "pageTitle"
+    button-text = "<< Voltar"
+    button-link = "/clientes"
+    button-class = "btn-light"
+></app-page-header>
+
+<form [formGroup]="resourceForm"(submit)="submitForm()" autocomplete="off" spellcheck="false">
+   
+    <div class="card">
+        <div class="card-header sub-header-white">
+            <h1 class = "h5">Informações do cliente:</h1>
+        </div>
+        <div class="card-body">
+        
+        </div>
+        <app-pessoa-form [resourceForm] = "resourceForm.get('pessoa')">
+
+        </app-pessoa-form>
+    </div>
+    
+    <app-server-error-message [server-error-messages] = "serverErrorMessages"></app-server-error-message>
+
+    <div style="width: fit-content;margin: 0 auto">
+            <button [disabled] ="submittingForm || resourceForm.invalid " type="submit"  class = "btn btn-primary btn-lg mt-2 " >Salvar</button>
+    </div>
+</form>

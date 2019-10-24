@@ -1,6 +1,6 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { BaseResourceModel } from '../models/base-resource.model';
-import { Observable, throwError } from 'rxjs';
+import { Observable, throwError,of} from 'rxjs';
 import{ map, catchError, flatMap}from 'rxjs/operators';
 import { Inject, Injector } from '@angular/core';
 
@@ -32,10 +32,14 @@ export abstract class BaseResourceService<T extends BaseResourceModel> {
 		)
 	}
 	create(resource: T): Observable<T>{
-		return this.http.post(this.apiPath, resource).pipe(
-			map(this.jsonDataToResource.bind(this)),
+		return  this.http.post(this.apiPath, resource,   { observe: 'response' }).pipe(
+			map(response =>{
+				let location = response.headers.get('Location');
+				resource.id = Number.parseInt(location.split(this.apiPath+"/")[1]);
+				return resource;
+			}),
 			catchError(this.handleError)
-			);
+			)
 	}
 	update(resource: T): Observable<T>{
 		const url = `${this.apiPath}/${resource.id}`

@@ -21,6 +21,9 @@ export class GetErrorMessage{
     
         else if( formControl.errors.email)
           return "Formato de email inválido"
+
+        else if(formControl.errors.cpfCnpjInvalid)
+          return "CPF/CNPJ invalido"
     
         else if( formControl.errors.minlength){
           const requiredLength = formControl.errors.minlength.requiredLength;

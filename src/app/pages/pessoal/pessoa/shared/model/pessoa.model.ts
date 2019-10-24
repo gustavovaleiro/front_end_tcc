@@ -21,6 +21,16 @@ export abstract class Pessoa extends BaseResourceModel {
         return this.tipo;
     }
 
+    static fromJson(jsonData: any): Pessoa{
+        let pessoa;
+        if(jsonData.tipo==TipoPessoa.PESSOAFISICA)
+            pessoa = Object.assign(new PessoaFisica(), jsonData)
+        
+        else
+            pessoa = Object.assign(new PessoaJuridica(), jsonData)
+        return pessoa;
+    }
+
 }
 
 export enum TipoPessoa{
@@ -32,7 +42,7 @@ export class PessoaFisica extends Pessoa{
     constructor(
 	public cpf?: string, 
 	public dataNascimento?: Date,
-	public rG?: RG,
+	public rg?: RG,
 	public nacionalidade?: string,
 	public naturalidade?: Cidade, 
     ){
@@ -40,9 +50,7 @@ export class PessoaFisica extends Pessoa{
         super.tipo = TipoPessoa.PESSOAFISICA;
     }
 
-    static fromJson(jsonData: any): Pessoa{
-        return Object.assign(new PessoaFisica(), jsonData);
-    }
+
 }
 
 export class PessoaJuridica extends Pessoa{
@@ -56,7 +64,5 @@ export class PessoaJuridica extends Pessoa{
         super.tipo = TipoPessoa.PESSOAJURIDICA;
     }
 
-    static fromJson(jsonData: any): Pessoa{
-        return Object.assign(new PessoaJuridica(), jsonData);
-    }
+
 }

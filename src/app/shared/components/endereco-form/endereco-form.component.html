@@ -1,0 +1,58 @@
+<app-sub-header-form titulo="Endereço(s)" botaoTexto="+ Endereço" (funcao)="adicionarElemento($event)" [enable]="formArray.enabled"></app-sub-header-form>
+<div class="card-body">
+    <div class="container-form row" *ngFor= "let endereco of formArray.controls; let i = index">
+        <div class="col container-linhas ">
+            <div class="row row-endereco"  >
+                <div class="col-md-4 col-cep">
+                   <mat-form-field>
+                        <input matInput placeholder="CEP" [formControl]="endereco.get('cep')">
+                        <mat-error >{{getErrorMessage(endereco.get('cep'))}}</mat-error>
+                    </mat-form-field>  
+                </div>
+               <div class="col-md-8 col-cidade">
+                   <app-cidade-selector
+                    [ufFormControl]="endereco.get('cidade.estado')"
+                    [cidadeFormControl]="endereco.get('cidade.nome')"
+                   ></app-cidade-selector>
+               </div>
+            </div>  <!--fim da primeira linha do body do complementar-->
+            <div class="row">
+                <div class="col-md-6 col-rua">
+                    <mat-form-field>
+                        <input matInput placeholder="Rua" [formControl]="endereco.get('rua')">
+                        <mat-error >{{getErrorMessage(endereco.get('rua'))}}</mat-error>
+                    </mat-form-field>  
+                </div> 
+                <div class="col-md-2 col-n">
+                    <mat-form-field>
+                        <input matInput placeholder="Nº" [formControl]="endereco.get('numero')">
+                        <mat-error >{{getErrorMessage(endereco.get('numero'))}}</mat-error>
+                    </mat-form-field>        
+                </div>
+                <div class="col-md-4 col-bairro">
+                    <mat-form-field>
+                        <input matInput placeholder="Bairro" [formControl]="endereco.get('bairro')">
+                        <mat-error >{{getErrorMessage(endereco.get('bairro'))}}</mat-error>
+                    </mat-form-field>   
+                </div>
+            </div> 
+            <div class="row">
+                <div class="col-md-6 col-complemento">
+                    <mat-form-field>
+                        <input matInput placeholder="Complemento" [formControl]="endereco.get('complemento')">
+                        <mat-error >{{getErrorMessage(endereco.get('complemento'))}}</mat-error>
+                    </mat-form-field>   
+                </div>
+                <div class="col-md-6 col-tipo">
+                    <mat-form-field>
+                        <input matInput placeholder="Tipo" [formControl]="endereco.get('tipo')">
+                        <mat-error >{{getErrorMessage(endereco.get('tipo'))}}</mat-error>
+                    </mat-form-field>  
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-1 col-excluir">
+                <excluir-complementar-row [index]="i" (callFunction)="excluirElemento($event)" [disabled]= "endereco.get('principal').value == true"></excluir-complementar-row> 
+        </div>
+    </div>
+</div>

@@ -67,13 +67,17 @@ export abstract class BaseResourceFormComponent<T extends BaseResourceModel> imp
 
     protected createResource() {
         const resource: T = this.jsonDataToResourceFn(this.resourceForm.value);
+        console.log(resource);
         this.resourceService.create(resource).subscribe(
-            (resource) => this.actionsForSuccess(resource),
+            (resource) => 
+                this.actionsForSuccess(resource),
+            
             (error) => this.actionsForError(error)
         );
     }
     protected updateResource() {
         const resource: T = this.jsonDataToResourceFn(this.resourceForm.value);
+        console.log(resource);
         this.resourceService.update(resource).subscribe(
             resource => this.actionsForSuccess(resource),
             error => this.actionsForError(error)
@@ -82,6 +86,7 @@ export abstract class BaseResourceFormComponent<T extends BaseResourceModel> imp
 
     protected actionsForSuccess(resource: T) {
         toastr.success("Solicitação processada com sucesso!");
+
         const baseResourcePath: string = this.route.snapshot.parent.url[0].path;
         this.router.navigateByUrl(baseResourcePath, {skipLocationChange: true}).then(
             ()=> this.router.navigate([baseResourcePath, resource.id, "edit"])
@@ -105,7 +110,6 @@ export abstract class BaseResourceFormComponent<T extends BaseResourceModel> imp
         else
             this.currentAction = 'edit';
     }
-
 
     protected loadResource() {
         if (this.currentAction == 'edit') {

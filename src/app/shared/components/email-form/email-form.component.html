@@ -1,0 +1,20 @@
+<app-sub-header-form titulo="Email(s)" botaoTexto="+ Email" (funcao)="adicionarElemento($event)" [enable]="formArray.enabled"></app-sub-header-form>
+<div class="card-body">
+    <div class="row row-telefone"  *ngFor= "let email of formArray.controls; let i = index">
+        <div class="col-4 col-tipo">
+           <mat-form-field>
+                <input matInput placeholder="Tipo" [formControl]="email.get('tipo')">
+                <mat-error >{{getErrorMessage(email.get('tipo'))}}</mat-error>
+            </mat-form-field>  
+        </div>
+        <div class="col-7 col-ddd">
+             <mat-form-field>
+                <input matInput placeholder="E-mail" [formControl]="email.get('email')">
+                <mat-error >{{getErrorMessage(email.get('email'))}}</mat-error>
+            </mat-form-field>    
+        </div>
+        <div class="col-1 col-excluir">
+            <excluir-complementar-row [index]="i" (callFunction)="excluirElemento($event)" [disabled]= "email.get('principal').value == true"></excluir-complementar-row>
+        </div>
+    </div>  <!--fim da primeira linha do body do complementar-->
+</div>

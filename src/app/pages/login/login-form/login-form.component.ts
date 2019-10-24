@@ -26,6 +26,7 @@ export class LoginFormComponent {
 
  }
  ngOnInit(){
+   this.auth.logout();
    this.buildResourceForm();
  }
   

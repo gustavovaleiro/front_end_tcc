@@ -19,10 +19,11 @@ export class UfSelectorComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    
     this.estadosFiltrados = this.ufFormControl.valueChanges
     .pipe(
       startWith(''),
-      map(value => typeof value === 'string' ? value : value.name),
+      map(value => typeof value === 'string' ? value : value!= null ? value.name : ''),
       map(name => name ? this._filterEstados(name) : this.estados)
     );
   }

@@ -16,6 +16,8 @@ import { UfSelectorComponent } from './components/cidade-selector/uf-selector/uf
 import { SubHeaderFormComponent } from './components/sub-header-form/sub-header-form.component';
 import { ComplementarFormExcluirComponent } from './components/complementar-form-excluir/complementar-form-excluir.component';
 import { TelefoneFormComponent } from './components/telefone-form/telefone-form.component';
+import { EmailFormComponent } from './components/email-form/email-form.component';
+import { EnderecoFormComponent } from './components/endereco-form/endereco-form.component';
 
 
 
@@ -31,6 +33,8 @@ import { TelefoneFormComponent } from './components/telefone-form/telefone-form.
     SubHeaderFormComponent,
     ComplementarFormExcluirComponent,
     TelefoneFormComponent,
+    EmailFormComponent,
+    EnderecoFormComponent,
   ],
   imports: [
     CommonModule,
@@ -62,6 +66,8 @@ import { TelefoneFormComponent } from './components/telefone-form/telefone-form.
     SubHeaderFormComponent,
     ComplementarFormExcluirComponent,
     TelefoneFormComponent,
+    EmailFormComponent,
+    EnderecoFormComponent,
   ]
 })
 export class SharedModule { }
