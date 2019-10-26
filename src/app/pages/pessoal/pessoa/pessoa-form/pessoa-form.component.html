@@ -19,14 +19,14 @@
                 <div class="col-md-4 col-cpf">
                         <mat-form-field>
                             <input matInput  placeholder="CPF" [formControl]="resourceForm.get('cpf')" autocomplete="off" spellcheck="false">
-                            <mat-error >{{getErrorMessage(resourceForm.get('cpf'))}}</mat-error>
+                            <mat-error >{{errorMessage.getErrorMessage(resourceForm.get('cpf'))}}</mat-error>
                         </mat-form-field>
                     </div>
                 <div class="col-md-8 col-nome">
                     <mat-form-field>
                         
                         <input matInput placeholder="Nome" [formControl]="resourceForm.get('nome')" autocomplete="off" spellcheck="false">
-                        <mat-error >{{getErrorMessage(resourceForm.get('nome'))}}</mat-error>
+                        <mat-error >{{errorMessage.getErrorMessage(resourceForm.get('nome'))}}</mat-error>
                     </mat-form-field>
                 </div>
             </div> <!--Fim da primeira linha de pessoa fisica-->
@@ -36,14 +36,14 @@
                         <input matInput [matDatepicker]="dp" placeholder="Data de Nascimento" [formControl]="resourceForm.get('dataNascimento')">
                         <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
                         <mat-datepicker #dp></mat-datepicker>
-                        <mat-error >{{getErrorMessage(resourceForm.get('dataNascimento'))}}</mat-error>
+                        <mat-error >{{errorMessage.getErrorMessage(resourceForm.get('dataNascimento'))}}</mat-error>
                     </mat-form-field>
                 </div>
 
                 <div class="col-md-3 col-nacionalidade">
                     <mat-form-field>
                         <input matInput placeholder="Nacionalidade" [formControl]="resourceForm.get('nacionalidade')">
-                        <mat-error >{{getErrorMessage(resourceForm.get('nacionalidade'))}}</mat-error>
+                        <mat-error >{{errorMessage.getErrorMessage(resourceForm.get('nacionalidade'))}}</mat-error>
                     </mat-form-field>
                 </div>
                 <div class="col-md-6 col-naturalidade">
@@ -58,7 +58,7 @@
                 <div class="col-md-4 col-rg-emissor">
                     <mat-form-field>
                         <input matInput placeholder="RG Emissor" [formControl]="resourceForm.get('rg.emissor')">
-                        <mat-error >{{getErrorMessage(resourceForm.get('rg.emissor'))}}</mat-error>
+                        <mat-error >{{errorMessage.getErrorMessage(resourceForm.get('rg.emissor'))}}</mat-error>
                         <mat-hint>Sem o estado</mat-hint>
                     </mat-form-field>
                 </div>
@@ -68,7 +68,7 @@
                 <div class="col-md-5 col-rg-numero">
                     <mat-form-field>
                         <input matInput placeholder="RG Número" [formControl]="resourceForm.get('rg.rg')">
-                        <mat-error >{{getErrorMessage(resourceForm.get('rg.rg'))}}</mat-error>
+                        <mat-error >{{errorMessage.getErrorMessage(resourceForm.get('rg.rg'))}}</mat-error>
                     </mat-form-field>
                 </div>
             </div> <!--Fim da terceira linha de pessoa fisica-->
@@ -78,13 +78,13 @@
                 <div class="col-md-6 col-cnpj">
                     <mat-form-field>
                         <input matInput placeholder="CNPJ" [formControl]="resourceForm.get('cnpj')"> 
-                        <mat-error >{{getErrorMessage(resourceForm.get('cnpj'))}}</mat-error>
+                        <mat-error >{{errorMessage.getErrorMessage(resourceForm.get('cnpj'))}}</mat-error>
                     </mat-form-field> 
                 </div>
                 <div class="col-md-6 col-nome-fantasia">
                     <mat-form-field>
                         <input matInput placeholder="Nome Fantasia" [formControl]="resourceForm.get('nome')">
-                        <mat-error >{{getErrorMessage(resourceForm.get('nome'))}}</mat-error>
+                        <mat-error >{{errorMessage.getErrorMessage(resourceForm.get('nome'))}}</mat-error>
                     </mat-form-field>   
                 </div>
             </div><!--Fim da primeira linha de pessoa juridica-->
@@ -92,19 +92,19 @@
                 <div class="col-md-4 col-razao-social">
                     <mat-form-field>
                         <input matInput placeholder="Razao Social" [formControl]="resourceForm.get('razaoSocial')">
-                        <mat-error >{{getErrorMessage(resourceForm.get('razaoSocial'))}}</mat-error>
+                        <mat-error >{{errorMessage.getErrorMessage(resourceForm.get('razaoSocial'))}}</mat-error>
                     </mat-form-field>
                 </div>
                 <div class="col-md-4 col-inscricao-estadual">
                     <mat-form-field>
                         <input matInput placeholder="Inscrição Estadual" [formControl]="resourceForm.get('inscricaoEstadual')">
-                        <mat-error >{{getErrorMessage(resourceForm.get('inscricaoEstadual'))}}</mat-error>
+                        <mat-error >{{errorMessage.getErrorMessage(resourceForm.get('inscricaoEstadual'))}}</mat-error>
                     </mat-form-field>
                 </div>
                 <div class="col-md-4 col-inscricao-municipal">
                     <mat-form-field>
                         <input matInput placeholder="Inscrição Municipal" [formControl]="resourceForm.get('inscricaoMunicipal')">
-                        <mat-error >{{getErrorMessage(resourceForm.get('inscricaoMunicipal'))}}</mat-error>
+                        <mat-error >{{errorMessage.getErrorMessage(resourceForm.get('inscricaoMunicipal'))}}</mat-error>
                     </mat-form-field>
                 </div>
             </div> <!--Fim da segunda linha de pessoa juridica-->

@@ -6,12 +6,12 @@ import { Telefone } from './telefone.model';
 
 export abstract class Pessoa extends BaseResourceModel {	
  
-    protected  tipo: TipoPessoa;
+    public  tipo: TipoPessoa;
     constructor(
         public nome?: string,
         public email ?: Array<Email>,
         public telefone?: Array<Telefone>,
-        public endereco?: Array<Endereco>,
+        public endereco?: Array<Endereco>, 
          ){
         super();
     
@@ -22,12 +22,15 @@ export abstract class Pessoa extends BaseResourceModel {
     }
 
     static fromJson(jsonData: any): Pessoa{
+        console.log("json data: ", jsonData)
         let pessoa;
         if(jsonData.tipo==TipoPessoa.PESSOAFISICA)
             pessoa = Object.assign(new PessoaFisica(), jsonData)
         
         else
             pessoa = Object.assign(new PessoaJuridica(), jsonData)
+
+        console.log("result of binding: ", pessoa);
         return pessoa;
     }
 

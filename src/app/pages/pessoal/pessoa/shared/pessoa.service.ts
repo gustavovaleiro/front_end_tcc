@@ -11,7 +11,7 @@ import { map, catchError } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
-export class PessoaService extends BaseResourceService<Pessoa> {
+export class PessoaService extends BaseResourceService<Pessoa> { 
   
   constructor( protected injector: Injector) {
      super(API_CONFIG.baseUrl+"/pessoas", injector, Pessoa.fromJson);

@@ -11,22 +11,36 @@
 ></app-page-header>
 
 <form [formGroup]="resourceForm"(submit)="submitForm()" autocomplete="off" spellcheck="false">
-   
+    <app-server-error-message [server-error-messages] = "serverErrorMessages"></app-server-error-message>
     <div class="card">
         <div class="card-header sub-header-white">
             <h1 class = "h5">Informações do cliente:</h1>
         </div>
         <div class="card-body">
-        
+            <div class="row">
+                <div class="col-md-4">
+                    <mat-form-field>
+                        <input matInput placeholder="Limite de crédito:" [formControl]="resourceForm.get('limiteCompra')">
+                        <mat-error >{{getErrorMessage(resourceForm.get('limiteCompra'))}}</mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="col-md-8">
+                    <mat-form-field>
+                        <input matInput placeholder="Observações: " [formControl]="resourceForm.get('descricao')">
+                        <mat-error >{{getErrorMessage(resourceForm.get('descricao'))}}</mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
         </div>
-        <app-pessoa-form [resourceForm] = "resourceForm.get('pessoa')">
+        <app-pessoa-form >
 
         </app-pessoa-form>
     </div>
     
-    <app-server-error-message [server-error-messages] = "serverErrorMessages"></app-server-error-message>
+  
 
     <div style="width: fit-content;margin: 0 auto">
-            <button [disabled] ="submittingForm || resourceForm.invalid " type="submit"  class = "btn btn-primary btn-lg mt-2 " >Salvar</button>
+            <button [disabled] ="submittingForm || !isValidForm()" type="submit"  class = "btn btn-primary btn-lg mt-2 " >Salvar</button>
     </div>
+    {{this.resourceForm.value|json}}
 </form>

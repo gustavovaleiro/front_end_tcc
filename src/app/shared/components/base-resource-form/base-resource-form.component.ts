@@ -1,4 +1,4 @@
-import {  OnInit, AfterContentChecked, Injector } from '@angular/core';
+import {  OnInit, AfterContentChecked, Injector, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router'
 import { FormGroup, FormBuilder, Validators, FormControl } from "@angular/forms"
 
@@ -7,12 +7,13 @@ import toastr from "toastr"
 import { BaseResourceModel } from '../../models/base-resource.model';
 import { BaseResourceService } from '../../services/base-resource.service';
 import { GetErrorMessage } from '../form-field-error/error-message';
+import { HttpErrorResponse } from '@angular/common/http';
 
 
 export abstract class BaseResourceFormComponent<T extends BaseResourceModel> implements OnInit, AfterContentChecked {
 
     currentAction: string;
-    resourceForm: FormGroup;
+     resourceForm: FormGroup;
     pageTitle: string;
     serverErrorMessages: string[] = null;
     submittingForm: boolean = false;
@@ -67,7 +68,7 @@ export abstract class BaseResourceFormComponent<T extends BaseResourceModel> imp
 
     protected createResource() {
         const resource: T = this.jsonDataToResourceFn(this.resourceForm.value);
-        console.log(resource);
+      
         this.resourceService.create(resource).subscribe(
             (resource) => 
                 this.actionsForSuccess(resource),
@@ -77,7 +78,7 @@ export abstract class BaseResourceFormComponent<T extends BaseResourceModel> imp
     }
     protected updateResource() {
         const resource: T = this.jsonDataToResourceFn(this.resourceForm.value);
-        console.log(resource);
+       
         this.resourceService.update(resource).subscribe(
             resource => this.actionsForSuccess(resource),
             error => this.actionsForError(error)
@@ -88,18 +89,22 @@ export abstract class BaseResourceFormComponent<T extends BaseResourceModel> imp
         toastr.success("Solicitação processada com sucesso!");
 
         const baseResourcePath: string = this.route.snapshot.parent.url[0].path;
-        this.router.navigateByUrl(baseResourcePath, {skipLocationChange: true}).then(
-            ()=> this.router.navigate([baseResourcePath, resource.id, "edit"])
-        );
+      //  this.router.navigateByUrl(baseResourcePath, {skipLocationChange: true}).then(
+      //      ()=> this.router.navigate([baseResourcePath, resource.id, "edit"])
+      //  );
     }
 
     protected actionsForError(error) {
         toastr.error("Ocorreu um erro ao processar a sua solicitação");
 
         this.submittingForm = false;
+        
+        if (error.status === 422){
+            this.serverErrorMessages = []
+           this.serverErrorMessages.push ((error as HttpErrorResponse).error.errors.map(err =>  err.message))
 
-        if (error.status === 422)
-            this.serverErrorMessages = JSON.parse(error._body).errors;
+        }
+           
         else
             this.serverErrorMessages = ["Falha na comunicação com o servidor. Por favor, tente mais tarde."];
     }

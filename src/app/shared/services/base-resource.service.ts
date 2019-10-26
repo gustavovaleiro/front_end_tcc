@@ -36,6 +36,7 @@ export abstract class BaseResourceService<T extends BaseResourceModel> {
 			map(response =>{
 				let location = response.headers.get('Location');
 				resource.id = Number.parseInt(location.split(this.apiPath+"/")[1]);
+				console.log("created resource: ", resource)
 				return resource;
 			}),
 			catchError(this.handleError)
@@ -43,7 +44,7 @@ export abstract class BaseResourceService<T extends BaseResourceModel> {
 	}
 	update(resource: T): Observable<T>{
 		const url = `${this.apiPath}/${resource.id}`
-
+		console.log("put", resource)
 		return this.http.put(url, resource).pipe(
 			catchError(this.handleError),
 			map(()=>resource)
