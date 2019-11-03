@@ -1,5 +1,5 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { NgModule, LOCALE_ID } from '@angular/core';
+import { CommonModule, registerLocaleData } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BreadCrumbComponent } from './components/bread-crumb/bread-crumb.component';
 import { RouterModule } from '@angular/router';
@@ -9,7 +9,8 @@ import { ServerErrorMessageComponent } from './components/server-error-message/s
 import { DashComponent } from '../pages/dashboard/dash/dash.component';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import {MatInputModule, MatDatepickerModule, MatCheckboxModule} from '@angular/material';
+import localePt from '@angular/common/locales/pt';
+import {MatInputModule, MatDatepickerModule, MatCheckboxModule, MatProgressSpinnerModule, MAT_DATE_LOCALE, DateAdapter, MAT_DATE_FORMATS} from '@angular/material';
 import { CalendarModule } from 'primeng/calendar';
 import { CidadeSelectorComponent } from './components/cidade-selector/cidade-selector.component';
 import { UfSelectorComponent } from './components/cidade-selector/uf-selector/uf-selector.component';
@@ -18,9 +19,22 @@ import { ComplementarFormExcluirComponent } from './components/complementar-form
 import { TelefoneFormComponent } from './components/telefone-form/telefone-form.component';
 import { EmailFormComponent } from './components/email-form/email-form.component';
 import { EnderecoFormComponent } from './components/endereco-form/endereco-form.component';
+import { CargoSelectorComponent } from './components/cargo-selector/cargo-selector.component';
+import { MomentDateAdapter } from '@angular/material-moment-adapter';
 
+export const MY_FORMATS = {
+  parse: {
+    dateInput: 'YYYY-MM-DD',
+  },
+  display: {
+    dateInput: 'DD/MM/YYYY',
+    monthYearLabel: 'YYYY',
+    dateA11yLabel: 'LL',
+    monthYearA11yLabel: 'YYYY',
+  },
+};
 
-
+registerLocaleData(localePt);
 
 @NgModule({
   declarations: [
@@ -35,6 +49,7 @@ import { EnderecoFormComponent } from './components/endereco-form/endereco-form.
     TelefoneFormComponent,
     EmailFormComponent,
     EnderecoFormComponent,
+    CargoSelectorComponent,
   ],
   imports: [
     CommonModule,
@@ -45,6 +60,7 @@ import { EnderecoFormComponent } from './components/endereco-form/endereco-form.
     MatFormFieldModule,
     MatInputModule,
     MatDatepickerModule,
+    MatProgressSpinnerModule,
   ],
   exports:[
     CommonModule,
@@ -56,6 +72,7 @@ import { EnderecoFormComponent } from './components/endereco-form/endereco-form.
     MatInputModule,
     MatDatepickerModule,
     MatCheckboxModule,
+    MatProgressSpinnerModule,
     
     BreadCrumbComponent,
     PageHeaderComponent,
@@ -68,6 +85,16 @@ import { EnderecoFormComponent } from './components/endereco-form/endereco-form.
     TelefoneFormComponent,
     EmailFormComponent,
     EnderecoFormComponent,
-  ]
+    CargoSelectorComponent,
+  ],
+  providers: [
+   
+    { provide: LOCALE_ID, useValue: "pt" },
+    {provide: MAT_DATE_LOCALE, useValue: 'pt-BR'},
+
+    {provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE]},
+    {provide: MAT_DATE_FORMATS, useValue: MY_FORMATS},
+  
+],
 })
 export class SharedModule { }

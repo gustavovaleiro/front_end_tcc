@@ -1,4 +1,4 @@
-import { Component, Injector, OnInit, Input } from '@angular/core';
+import { Component, Injector, OnInit, Input, ViewChild } from '@angular/core';
 
 import {  Validators, FormArray, FormGroup, AbstractControl, FormControl } from "@angular/forms"
 
@@ -12,19 +12,11 @@ import { EnderecoFormComponent } from 'src/app/shared/components/endereco-form/e
 import { TelefoneFormComponent } from 'src/app/shared/components/telefone-form/telefone-form.component';
 import { EmailFormComponent } from 'src/app/shared/components/email-form/email-form.component';
 import { CpfCnpjValidator } from 'src/app/shared/services/cpf-cnpj.validators';
+import { MatDatepicker } from '@angular/material';
+import { Moment } from 'moment';
 
 
-export const MY_FORMATS = {
-  parse: {
-    dateInput: 'YYYY-MM-DD',
-  },
-  display: {
-    dateInput: 'YYYY-MM-DD',
-    monthYearLabel: 'YYYY',
-    dateA11yLabel: 'LL',
-    monthYearA11yLabel: 'YYYY',
-  },
-};
+
 @Component({
 
   selector: 'app-pessoa-form',
@@ -32,10 +24,7 @@ export const MY_FORMATS = {
   styleUrls: ['./pessoa-form.component.css'],
   providers: [
     
-    {provide: MAT_DATE_LOCALE, useValue: 'pt-BR'},
-
-    {provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE]},
-    {provide: MAT_DATE_FORMATS, useValue: MY_FORMATS},
+    
     
   ],
 })
@@ -43,7 +32,7 @@ export class PessoaFormComponent extends BaseResourceFormComponent<Pessoa> imple
   dateOfBirth: Date;
   private lastValidCpf;
   resourceFormEnable: boolean = true;
-
+  @ViewChild('dp',{static: false}) dp: MatDatepicker<Moment>;
   constructor( 
     private _adapter: DateAdapter<any>,
     protected pessoaService: PessoaService,
@@ -178,6 +167,7 @@ export class PessoaFormComponent extends BaseResourceFormComponent<Pessoa> imple
     if (!this.resourceFormEnable) {
       this.toggleEnableDisableForm(true);
       control.enable({ emitEvent: false });
+      this.dp.disabled = false;
     }
   }
 
@@ -195,7 +185,7 @@ export class PessoaFormComponent extends BaseResourceFormComponent<Pessoa> imple
       id: [null],
       tipo: [TipoPessoa.PESSOAFISICA, [Validators.required]],
       nome: [null, [Validators.required, Validators.minLength(8)]],
-      cpf: [null, [Validators.required, CpfCnpjValidator.validate]],
+      cpf: [null, [Validators.required, CpfCnpjValidator.validate, Validators.maxLength(11)]],
       dataNascimento: [null, [Validators.required] ],
       naturalidade: this.formBuilder.group({
         id: [null],

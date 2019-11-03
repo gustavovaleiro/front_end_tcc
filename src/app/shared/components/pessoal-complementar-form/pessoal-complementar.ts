@@ -25,6 +25,10 @@ export abstract class PessoaComplementar implements OnInit, OnChanges
       else
         control.disable();
     })
+    this.formArray.controls.forEach( control => {
+        if(!this.existePrincipal())
+          control.get('principal').setValue(true);}
+    )
 
   }
   ngOnInit(){

@@ -17,8 +17,11 @@ export class CpfCnpjValidator implements Validator {
                 .reduce((total, current) => total + current) % CpfCnpjValidator.cpfLength;
 
         if (digit < 2 && isCpf) {
-            return 0;
-        }
+             return 0; } 
+        else if (digit < 2) 
+        { return 0; }
+
+
 
         return CpfCnpjValidator.cpfLength - digit;
     }

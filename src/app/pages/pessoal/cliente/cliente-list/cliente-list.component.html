@@ -1,0 +1,59 @@
+
+<app-bread-crumb 
+     [items]="[{text: 'Clientes'}]">
+</app-bread-crumb>
+<app-page-header
+    page-title= "Clientes"
+    button-text = "+ Novo Cliente"
+    button-link = "new"
+    button-class = "btn-success"
+></app-page-header>
+
+
+<table class="table table-hover table-striped ">
+    <thead>
+        <tr class ="bg-primary text-light">
+            <th class = "coluna" scope = "col">Nome</th>
+            <th class = "coluna" scope = "col">Tipo</th>
+            <th class = "coluna" scope = "col" >Limite de Compra</th>
+            <th class = "coluna" scope = "col">Telefone</th>
+            <th class = "coluna" scope = "col" >Email</th>
+            <th class = "coluna" scope = "col">Cidade</th>
+            <th class = "coluna" scope = "col" class = "text-center">Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr  scope = "row" *ngFor="let cliente of resources">
+            <td class = "coluna">
+                {{cliente.nome}}
+            </td>
+            <td class = "coluna">
+                {{cliente.tipo}}
+            </td>
+            <td class = "coluna">
+                <span class = "text-left">
+                        R$  
+                </span>
+                <span  style = "float: right;" class = "text-right">
+                        {{cliente.limteCompra | number: '.2'}}
+                </span>
+             
+            </td>
+            <td class = "coluna">
+                {{cliente.telefoneWithoutTipo}}
+            </td>
+            <td class = "coluna coluna-email" >
+                {{cliente.email}}
+            </td>
+            <td class = "coluna">
+                {{cliente.cidade}}
+            </td>
+            <td class = "coluna" >
+                <div style="display: block; width: 126px">
+                    <a   [routerLink]="[cliente.id, 'edit']"class="btn btn-info btn-sm mr-2">Editar</a>
+                    <button  (click)="deleteResource(cliente)"class="btn btn-danger btn-sm">Excluir</button>
+                </div>
+            </td>
+        </tr>
+    </tbody>
+</table>

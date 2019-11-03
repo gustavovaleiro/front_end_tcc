@@ -2,20 +2,22 @@ import { BaseResourceService } from '../../services/base-resource.service';
 import { BaseResourceModel } from '../../models/base-resource.model';
 import { OnInit } from '@angular/core';
 
-export abstract class BaseResourceListComponent<T extends BaseResourceModel> implements OnInit{
-    resources: T[] = [];
+export abstract class BaseResourceListComponent<T extends BaseResourceModel,Y extends BaseResourceModel> implements OnInit{
+    resources: Y[] = [];
 
     constructor(protected resourceService: BaseResourceService<T>) { 
         
     }
   
     ngOnInit() {
-      this.resourceService.getAll().subscribe(
-        resources => this.resources = resources.sort((a,b) => b.id - a.id), 
+      this.resourceService.getAllPage().subscribe(
+        resources => {
+          this.resources =  resources.sort((a,b) => b.id - a.id) 
+          console.log(this.resources)}, 
         error => alert('erro ao carregar a lista'));
     }
   
-    deleteResource(resource: T){
+    deleteResource(resource: Y){
       const mustDelete = confirm("Deseja realmente excluir este item?");
       
       if(mustDelete)

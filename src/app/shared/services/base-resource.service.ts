@@ -10,15 +10,16 @@ export abstract class BaseResourceService<T extends BaseResourceModel> {
 	constructor(
 		protected apiPath: string,
 		protected injector: Injector,
-		protected jsonDataToResourcefn: (jsonData: any)=> T
+		protected jsonDataToResourcefn: (jsonData: any)=> T,
+		protected jsonDataToResourceDTOfn ?: (jsonData: any)=> T
 		){
 		this.http = injector.get(HttpClient);
 	}
 	
 	
-	getAll(): Observable<T[]>{
-		return this.http.get(this.apiPath).pipe(
-			map(this.jsonDataToResources.bind(this)),
+	getAllPage(): Observable<any[]>{
+		return this.http.get(this.apiPath+"/page").pipe(
+			map(this.jsonDataToResourcesPage.bind(this)),
 			catchError(this.handleError)
 		)
 	}
@@ -32,11 +33,11 @@ export abstract class BaseResourceService<T extends BaseResourceModel> {
 		)
 	}
 	create(resource: T): Observable<T>{
+
 		return  this.http.post(this.apiPath, resource,   { observe: 'response' }).pipe(
 			map(response =>{
 				let location = response.headers.get('Location');
 				resource.id = Number.parseInt(location.split(this.apiPath+"/")[1]);
-				console.log("created resource: ", resource)
 				return resource;
 			}),
 			catchError(this.handleError)
@@ -60,10 +61,11 @@ export abstract class BaseResourceService<T extends BaseResourceModel> {
 	}
 
 
-	protected jsonDataToResources(jsonData: any[]): T[]{
+	protected jsonDataToResourcesPage(jsonData: any): T[]{
+		console.log(jsonData);
 		const resources: T[] =[];
-		jsonData.forEach(element => {
-			resources.push(this.jsonDataToResourcefn(element));
+		jsonData.content.forEach(element => {
+			resources.push(this.jsonDataToResourceDTOfn(element));
 		});
 		return resources;
 	  }

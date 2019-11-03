@@ -1,5 +1,5 @@
 import { BaseResourceService } from 'src/app/shared/services/base-resource.service';
-import { Cliente, ClienteListDTO } from '../model/cliente.model';
+import {Funcionario, FuncionarioListDTO } from '../model/funcionario.model';
 import { Injectable, Injector } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { API_CONFIG } from 'src/app/core/config/api.config';
@@ -9,13 +9,17 @@ import { catchError, map, flatMap } from 'rxjs/operators';
 @Injectable({
     providedIn: 'root'
   })
-export class ClienteService extends BaseResourceService<Cliente> {
+export class FuncionarioService extends BaseResourceService<Funcionario> {
     constructor(protected http: HttpClient, protected injector: Injector, private pessoaService: PessoaService){
-        super(API_CONFIG.baseUrl+"/clientes", injector, Cliente.fromJson, ClienteListDTO.fromJson)
+        super(API_CONFIG.baseUrl+"/funcionarios", injector, Funcionario.fromJson, FuncionarioListDTO.fromJson)
     }
 
 
-    create(resource: Cliente):Observable<Cliente>{
+    create(resource: Funcionario):Observable<Funcionario>{
+        if(resource.comissao > 1){
+            resource.comissao/100;
+        }
+
         if(resource.pessoa.id != null && resource.pessoa.id > 0){
            return this.pessoaService.update(resource.pessoa).pipe(
                 flatMap(pessoa => {
@@ -35,7 +39,7 @@ export class ClienteService extends BaseResourceService<Cliente> {
         }
     }
 
-    update(resource: Cliente):Observable<Cliente>{
+    update(resource: Funcionario):Observable<Funcionario>{
         if(resource.pessoa.id != null && resource.pessoa.id > 0  && resource.id == resource.pessoa.id){
            return this.pessoaService.update(resource.pessoa).pipe(
             flatMap(pessoa => {
@@ -45,7 +49,7 @@ export class ClienteService extends BaseResourceService<Cliente> {
                 catchError(this.handleError)
             )
         } else {
-            return throwError("Não pode alterar a pessoa de um cliente")
+            return throwError("Não pode alterar a pessoa de um funcionario")
         }
     }
 

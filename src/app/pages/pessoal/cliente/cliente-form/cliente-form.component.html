@@ -1,6 +1,7 @@
+
 <app-bread-crumb 
-     [items]="[{text: 'Clientes', link: '/clientes'},
-               {text: pageTitle}]">
+        [items]="[{text: 'Clientes', link: '/clientes'},
+                {text: pageTitle}]">
 </app-bread-crumb>
 
 <app-page-header
@@ -10,7 +11,7 @@
     button-class = "btn-light"
 ></app-page-header>
 
-<form [formGroup]="resourceForm"(submit)="submitForm()" autocomplete="off" spellcheck="false">
+<form  class = "form" [formGroup]="resourceForm"(submit)="submitForm()" autocomplete="off" spellcheck="false">
     <app-server-error-message [server-error-messages] = "serverErrorMessages"></app-server-error-message>
     <div class="card">
         <div class="card-header sub-header-white">
@@ -20,7 +21,8 @@
             <div class="row">
                 <div class="col-md-4">
                     <mat-form-field>
-                        <input matInput placeholder="Limite de crédito:" [formControl]="resourceForm.get('limiteCompra')">
+                        <input [imask]="imaskConfig" matInput placeholder="Limite de crédito:" [formControl]="resourceForm.get('limiteCompra')">
+                        <span matPrefix>R$&nbsp;</span>
                         <mat-error >{{getErrorMessage(resourceForm.get('limiteCompra'))}}</mat-error>
                     </mat-form-field>
                 </div>
@@ -37,10 +39,9 @@
         </app-pessoa-form>
     </div>
     
-  
+    
 
     <div style="width: fit-content;margin: 0 auto">
             <button [disabled] ="submittingForm || !isValidForm()" type="submit"  class = "btn btn-primary btn-lg mt-2 " >Salvar</button>
     </div>
-    {{this.resourceForm.value|json}}
 </form>

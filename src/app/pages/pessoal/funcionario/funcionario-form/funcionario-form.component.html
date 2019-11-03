@@ -1,0 +1,71 @@
+
+<app-bread-crumb 
+        [items]="[{text: 'Funcionarios', link: '/funcionarios'},
+                {text: pageTitle}]">
+</app-bread-crumb>
+
+<app-page-header
+    [page-title]= "pageTitle"
+    button-text = "<< Voltar"
+    button-link = "/funcionarios"
+    button-class = "btn-light"
+></app-page-header>
+
+<form  class = "form" [formGroup]="resourceForm"(submit)="submitForm()" autocomplete="off" spellcheck="false">
+ 
+    <app-server-error-message [server-error-messages] = "serverErrorMessages"></app-server-error-message>
+    <div class="card">
+        <div class="card-header sub-header-white">
+            <h1 class = "h5">Informações do funcionario:</h1>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="c col-md-2">
+                    <mat-form-field>
+                        <input matInput placeholder="Matricula" [formControl]="resourceForm.get('matricula')" autocomplete="off" spellcheck="false">
+                        <mat-error >{{errorMessage.getErrorMessage(resourceForm.get('matricula'))}}</mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="c col-md-2">
+                    <app-cargo-selector 
+                    [formControlNome] = "resourceForm.get('cargo.nomeCargo')"
+                    [formControlId] = "resourceForm.get('cargo.id')"></app-cargo-selector>
+                </div>
+                <div class="c col-md-3">
+                    <mat-form-field>
+                        <input matInput [matDatepicker]="dp" placeholder="Data Admissão" [formControl]="resourceForm.get('dataDeAdmissao')">
+                        <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
+                        <mat-datepicker #dp></mat-datepicker>
+                        <mat-error >{{errorMessage.getErrorMessage(resourceForm.get('dataDeAdmissao'))}}</mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="c col-md-2">
+                     <mat-form-field>
+                        <input matInput placeholder="Comissão"  type="number"  [formControl]="resourceForm.get('comissao')" autocomplete="off" spellcheck="false">
+                        <span matSuffix>%</span>
+                        <mat-error >{{errorMessage.getErrorMessage(resourceForm.get('comissao'))}}</mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="c col-md-2">
+                    <mat-form-field>
+                        <input matInput [imask]="imaskConfig" type="number" placeholder="Adcional Pessoal" [formControl]="resourceForm.get('adicionalPessoal')" autocomplete="off" spellcheck="false">
+                        <span matPrefix>R$&nbsp;</span>
+                        <mat-error >{{errorMessage.getErrorMessage(resourceForm.get('adicionalPessoal'))}}</mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+        </div>
+        <app-pessoa-form >
+
+        </app-pessoa-form>
+    </div>
+    
+    
+
+    <div style="width: fit-content;margin: 0 auto">
+            <button [disabled] ="submittingForm || !isValidForm()" type="submit"  class = "btn btn-primary btn-lg mt-2 " >Salvar</button>
+    </div>
+    
+    {{this.resourceForm.value | json}}
+</form>
+

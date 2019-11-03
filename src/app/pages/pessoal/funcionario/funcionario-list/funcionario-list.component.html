@@ -1,0 +1,53 @@
+
+<app-bread-crumb 
+     [items]="[{text: 'Funcionarios'}]">
+</app-bread-crumb>
+<app-page-header
+    page-title= "Funcionarios"
+    button-text = "+ Novo Funcionario"
+    button-link = "new"
+    button-class = "btn-success"
+></app-page-header>
+
+
+<table class="table table-hover table-striped ">
+    <thead>
+        <tr class ="bg-primary text-light">
+            <th class = "coluna" scope = "col">Nome</th>
+            <th class = "coluna" scope = "col">Tipo</th>
+            <th class = "coluna" scope = "col" >Matricula</th>
+            <th class = "coluna" scope = "col">Cargo</th>
+            <th class = "coluna" scope = "col" >Telefone</th>
+            <th class = "coluna" scope = "col">Email</th>
+            <th class = "coluna" scope = "col" class = "text-center">Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr  scope = "row" *ngFor="let funcionario of resources">
+            <td class = "coluna">
+                {{funcionario.nome}}
+            </td>
+            <td class = "coluna">
+                {{funcionario.tipo}}
+            </td>
+            <td class = "coluna">
+                {{funcionario.matricula}}
+            </td>
+            <td class = "coluna">
+                    {{funcionario.cargo}}
+            </td>
+            <td class = "coluna">
+                {{funcionario.telefoneWithoutTipo}}
+            </td>
+            <td class = "coluna coluna-email" >
+                {{funcionario.email}}
+            </td>
+            <td class = "coluna" >
+                <div style="display: block; width: 126px">
+                    <a   [routerLink]="[funcionario.id, 'edit']"class="btn btn-info btn-sm mr-2">Editar</a>
+                    <button  (click)="deleteResource(funcionario)"class="btn btn-danger btn-sm">Excluir</button>
+                </div>
+            </td>
+        </tr>
+    </tbody>
+</table>

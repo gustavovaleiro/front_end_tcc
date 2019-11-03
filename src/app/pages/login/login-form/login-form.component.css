@@ -78,6 +78,7 @@
     margin: auto;
     height: 100%;
     background: url(../../../../assets/background.jpg) #000 no-repeat center;
+    background-size: cover;
 }
 
 mat-form-field{
@@ -86,10 +87,9 @@ mat-form-field{
     .background_full::before {
         content: "";
         position: absolute;
-        top: -20px; left: -20px;
-        width: 110%; height: 110%;
-        background-image: url(../../../../assets/background.jpg);
-        filter: blur(15px);
+        
+        width: 100%; height: 100%;
+        background-image: url(../../../../assets/background_blur.jpg);
         background-repeat: no-repeat;
         background-size: cover;
     }

@@ -43,3 +43,9 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     background: white !important ;
     color: #000066;
 }
+
+
+ .table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
+    background-color:  rgba(0, 0, 0, 0.08)!important;
+    font-weight: 500;
+  }

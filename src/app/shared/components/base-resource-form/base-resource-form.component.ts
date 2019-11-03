@@ -87,21 +87,35 @@ export abstract class BaseResourceFormComponent<T extends BaseResourceModel> imp
 
     protected actionsForSuccess(resource: T) {
         toastr.success("Solicitação processada com sucesso!");
-
+        let scrollToTop = window.setInterval(() => {
+            let pos = window.pageYOffset;
+            if (pos > 0) {
+                window.scrollTo(0, pos - 20); // how far to scroll on each step
+            } else {
+                window.clearInterval(scrollToTop);
+            }
+        }, 16);
         const baseResourcePath: string = this.route.snapshot.parent.url[0].path;
-      //  this.router.navigateByUrl(baseResourcePath, {skipLocationChange: true}).then(
-      //      ()=> this.router.navigate([baseResourcePath, resource.id, "edit"])
-      //  );
+        this.router.navigateByUrl(baseResourcePath, {skipLocationChange: true}).then(
+            ()=> this.router.navigate([baseResourcePath, resource.id, "edit"])
+        );
     }
 
     protected actionsForError(error) {
         toastr.error("Ocorreu um erro ao processar a sua solicitação");
-
+        console.log(error);
         this.submittingForm = false;
-        
+        let scrollToTop = window.setInterval(() => {
+            let pos = window.pageYOffset;
+            if (pos > 0) {
+                window.scrollTo(0, pos - 20); // how far to scroll on each step
+            } else {
+                window.clearInterval(scrollToTop);
+            }
+        }, 16);
         if (error.status === 422){
             this.serverErrorMessages = []
-           this.serverErrorMessages.push ((error as HttpErrorResponse).error.errors.map(err =>  err.message))
+            this.serverErrorMessages.push ((error as HttpErrorResponse).error.errors.map(err =>  err.message))
 
         }
            

@@ -3,24 +3,24 @@ import { Component, Injector, OnInit, ViewChild, AfterViewInit } from '@angular/
 import { BaseResourceFormComponent } from 'src/app/shared/components/base-resource-form/base-resource-form.component';
 import { switchMap } from 'rxjs/operators';
 
-import { Cliente } from '../shared/model/cliente.model';
-import { ClienteService } from '../shared/service/cliente.service';
 import { PessoaFormComponent } from '../../pessoa/pessoa-form/pessoa-form.component';
-import { FormGroup } from '@angular/forms';
+import { Validators } from '@angular/forms';
+import { Funcionario } from '../../funcionario/shared/model/funcionario.model';
+import { FuncionarioService } from '../shared/service/cliente.service';
 
 
 
 @Component({
 
-  selector: 'app-cliente-form',
-  templateUrl: './cliente-form.component.html',
-  styleUrls: ['./cliente-form.component.css'],
+  selector: 'app-funcionario-form',
+  templateUrl: './funcionario-form.component.html',
+  styleUrls: ['./funcionario-form.component.css'],
   providers: [
     
     
   ],
 })
-export class ClienteFormComponent extends BaseResourceFormComponent<Cliente> implements OnInit {
+export class FuncionarioFormComponent extends BaseResourceFormComponent<Funcionario> implements OnInit {
 
   imaskConfig={
     mask: Number,
@@ -32,9 +32,9 @@ export class ClienteFormComponent extends BaseResourceFormComponent<Cliente> imp
   };
   @ViewChild(PessoaFormComponent,{static: false}) pessoaComponent: PessoaFormComponent;
   constructor( 
-    protected clienteService: ClienteService,
-    protected injector: Injector
-  ) {super(injector, new Cliente(), clienteService, Cliente.fromJson)}
+    protected funcionarioService: FuncionarioService,
+    protected injector: Injector,
+  ) {super(injector, new Funcionario(), funcionarioService, Funcionario.fromJson)}
   
     
   protected loadResource() {
@@ -53,39 +53,43 @@ export class ClienteFormComponent extends BaseResourceFormComponent<Cliente> imp
   protected buildResourceForm(){
     this.resourceForm = this.formBuilder.group({
       id: [null],
-      limiteCompra: [null],
-      descricao:[null],
-
+      matricula: [null, Validators.required],
+      cargo: this.formBuilder.group({
+        id: ['', Validators.required],
+        nomeCargo: ['', Validators.required]
+      }),
+      dataDeAdmissao: [null, Validators.required],
+      comissao: [null, Validators.required],
+      adicionalPessoal: [null, Validators.required]
     });
     
   }
   ngOnInit() {
     super.ngOnInit();
   }
-
   isValidForm(){
    return this.resourceForm && this.resourceForm.valid &&
    this.pessoaComponent && this.pessoaComponent.resourceForm && this.pessoaComponent.resourceForm.valid
   }
   protected createResource(){
-    let  cliente = this.getClienteFromForm();
+    let  funcionario = this.getFuncionarioFromForm();
   
-    this.resourceService.create(cliente).subscribe(
-      (cliente) =>this.actionsForSuccess(cliente),
+    this.resourceService.create(funcionario).subscribe(
+      (funcionario) =>this.actionsForSuccess(funcionario),
       (error) => this.actionsForError(error)
     )
   }
   protected updateResource(){
-    let  cliente = this.getClienteFromForm();
-    this.resourceService.update(cliente).subscribe(
-      (cliente) => this.actionsForSuccess(cliente),
+    let  funcionario = this.getFuncionarioFromForm();
+    this.resourceService.update(funcionario).subscribe(
+      (funcionario) => this.actionsForSuccess(funcionario),
       (error) => this.actionsForError(error)
     )
   }
-  private getClienteFromForm(): Cliente{
-    let cliente = this.jsonDataToResourceFn(this.resourceForm.value);
-    cliente.pessoa = this.pessoaComponent.getPessoa();
-    return cliente;
+  private getFuncionarioFromForm(): Funcionario{
+    let funcionario = this.jsonDataToResourceFn(this.resourceForm.value);
+    funcionario.pessoa = this.pessoaComponent.getPessoa();
+    return funcionario;
   }
 
   get formValue(){
@@ -93,11 +97,11 @@ export class ClienteFormComponent extends BaseResourceFormComponent<Cliente> imp
   }
 
   protected creationPageTitle():string{
-    return "Cadastro de Novo Cliente"; 
+    return "Cadastro de Novo Funcionario"; 
   }
 
   protected editionPageTitle(): string{
     const name = this.resource.pessoa.nome || ''
-    return "Editando Cliente: " + name;
+    return "Editando Funcionario: " + name;
   }
 }
