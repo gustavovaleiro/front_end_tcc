@@ -1,0 +1,18 @@
+.selector-container{
+    margin-right: 32px;
+    max-width: 250px!important;
+}
+.selector-element{
+    margin-right: 12px;
+    max-width: 192px!important;
+}
+.btn-adiciona-complementar{
+    padding-left: 12px;
+    padding-right: 12px;
+    margin-top: 12px;
+    margin-bottom: 16px;
+}
+.btn-excluir{
+   font-weight: bold;
+   height: fit-content;
+ }

@@ -16,7 +16,7 @@ export class CargoSelectorComponent implements OnInit {
 
   filteredCargo: Cargo[] = [];
   @Input() formControlId: FormControl;
-  @Input() formControlNome: FormControl;
+  @Input() formControlNome: FormControl; 
   isLoading = false;
    
   constructor( private cargoService: CargoService) {}
@@ -28,12 +28,15 @@ export class CargoSelectorComponent implements OnInit {
       tap(() => this.isLoading = true),
       switchMap(value => {
         if( this.filteredCargo.findIndex(car => car.nomeCargo == value) == -1){
+          this.formControlId.setValue('');
           return this.cargoService.getAllByName(value)
           .pipe(catchError(err => of([])),
             finalize(() => this.isLoading = false),
             )
         } else{
-          console.log(this.filteredCargo)
+          let id =  this.getIdOf(value)
+          if(id>-1)
+          this.formControlId.setValue(id);
           this.isLoading = false;
           return of(this.filteredCargo);
         }
@@ -55,6 +58,7 @@ export class CargoSelectorComponent implements OnInit {
   }
   select(event: MatAutocompleteSelectedEvent){
     let id = this.getIdOf(event.option.value);
+ 
     if(id>-1)
        this.formControlId.setValue(id);
   }

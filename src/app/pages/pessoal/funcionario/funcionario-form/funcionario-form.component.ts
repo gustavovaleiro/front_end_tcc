@@ -1,12 +1,13 @@
 import { Component, Injector, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 
 import { BaseResourceFormComponent } from 'src/app/shared/components/base-resource-form/base-resource-form.component';
-import { switchMap } from 'rxjs/operators';
+import { switchMap } from 'rxjs/operators'; 
 
 import { PessoaFormComponent } from '../../pessoa/pessoa-form/pessoa-form.component';
 import { Validators } from '@angular/forms';
 import { Funcionario } from '../../funcionario/shared/model/funcionario.model';
-import { FuncionarioService } from '../shared/service/cliente.service';
+import { FuncionarioService } from '../shared/service/funcionario.service';
+
 
 
 

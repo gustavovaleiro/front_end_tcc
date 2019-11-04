@@ -21,6 +21,8 @@ import { EmailFormComponent } from './components/email-form/email-form.component
 import { EnderecoFormComponent } from './components/endereco-form/endereco-form.component';
 import { CargoSelectorComponent } from './components/cargo-selector/cargo-selector.component';
 import { MomentDateAdapter } from '@angular/material-moment-adapter';
+import { KzCpfCnpjPipe } from './pipe/cnpj-cpf-format.pipe';
+import { CategoriaSelectorComponent } from './components/categoria-selector/categoria-selector.component';
 
 export const MY_FORMATS = {
   parse: {
@@ -50,6 +52,8 @@ registerLocaleData(localePt);
     EmailFormComponent,
     EnderecoFormComponent,
     CargoSelectorComponent,
+    KzCpfCnpjPipe,
+    CategoriaSelectorComponent
   ],
   imports: [
     CommonModule,
@@ -86,6 +90,8 @@ registerLocaleData(localePt);
     EmailFormComponent,
     EnderecoFormComponent,
     CargoSelectorComponent,
+    KzCpfCnpjPipe,
+    CategoriaSelectorComponent
   ],
   providers: [
    

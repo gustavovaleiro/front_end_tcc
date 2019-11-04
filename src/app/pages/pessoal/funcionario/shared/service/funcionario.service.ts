@@ -40,6 +40,9 @@ export class FuncionarioService extends BaseResourceService<Funcionario> {
     }
 
     update(resource: Funcionario):Observable<Funcionario>{
+        if(resource.comissao > 1){
+            resource.comissao/100;
+        }
         if(resource.pessoa.id != null && resource.pessoa.id > 0  && resource.id == resource.pessoa.id){
            return this.pessoaService.update(resource.pessoa).pipe(
             flatMap(pessoa => {

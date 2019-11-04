@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { BaseResourceListComponent } from 'src/app/shared/components/base-resource-list/base-resource-list.component';
-import { FuncionarioService } from '../shared/service/cliente.service';
+import { FuncionarioService } from '../shared/service/funcionario.service';
 import { Funcionario, FuncionarioListDTO } from '../shared/model/funcionario.model';
 
 

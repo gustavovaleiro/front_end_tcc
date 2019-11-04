@@ -1,0 +1,48 @@
+
+<app-bread-crumb 
+[items]="[{text: 'Fornecedor', link: '/fornecedores'},
+        {text: pageTitle}]">
+</app-bread-crumb>
+ 
+<app-page-header
+[page-title]= "pageTitle"
+button-text = "<< Voltar"
+button-link = "/fornecedores"
+button-class = "btn-light"
+></app-page-header>
+
+<form  class = "form" [formGroup]="resourceForm"(submit)="submitForm()" autocomplete="off" spellcheck="false">
+<app-server-error-message [server-error-messages] = "serverErrorMessages"></app-server-error-message>
+<div class="card">
+<div class="card-header sub-header-white">
+        <h1 class = "h5">Informações do fornecedor:</h1>
+</div>
+<div class="card-body">
+    <div class="d-flex flex-row flex-wrap">
+        <div  *ngFor= "let categoria of categorias.controls; let i = index">
+            <div class="d-flex flex-row selector-container">
+                <div class="selector-element">
+                    <app-categoria-selector  
+                    [formControlNome] = "categoria.get('nome')"
+                    [formControlId] = "categoria.get('id')"></app-categoria-selector>
+                </div>
+                <button (click) ="excluirCategoria(i)" class="btn btn-danger btn-sm btn-excluir">
+                       X
+                </button>
+            </div>
+        </div>
+        <button type="button" (click)="adicionaCategoria()" class="btn btn-success btn-adiciona-complementar ">
+            + Cat
+        </button>
+    </div>
+</div>
+<app-pessoa-form >
+</app-pessoa-form>
+</div>
+
+
+<div style="width: fit-content;margin: 0 auto">
+    <button [disabled] ="submittingForm || !isValidForm()" type="submit"  class = "btn btn-primary btn-lg mt-2 " >Salvar</button>
+</div>
+{{resourceForm.value | json}}
+</form>

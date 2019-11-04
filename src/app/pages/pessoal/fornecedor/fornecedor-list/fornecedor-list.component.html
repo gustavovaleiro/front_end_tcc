@@ -1,0 +1,53 @@
+
+<app-bread-crumb 
+[items]="[{text: 'Fornecedores'}]">
+</app-bread-crumb>
+<app-page-header
+page-title= "Fornecedores"
+button-text = "+ Novo Fornecedor"
+button-link = "new"
+button-class = "btn-success"
+></app-page-header>
+
+
+<table class="table table-hover table-striped ">
+<thead>
+   <tr class ="bg-primary text-light">
+       <th class = "coluna" scope = "col">Nome</th>
+       <th class = "coluna" scope = "col">Tipo</th>
+       <th class = "coluna" scope = "col" >Documento</th>
+       <th class = "coluna" scope = "col">Telefone</th>
+       <th class = "coluna" scope = "col" >Email</th>
+       <th class = "coluna" scope = "col">Cidade</th>
+       <th class = "coluna" scope = "col" class = "text-center">Ações</th>
+   </tr>
+</thead>
+<tbody>
+   <tr  scope = "row" *ngFor="let fornecedor of resources">
+       <td class = "coluna">
+           {{fornecedor.nome}}
+       </td>
+       <td class = "coluna">
+           {{fornecedor.tipo}}
+       </td>
+       <td class = "coluna">
+            {{fornecedor.cpfCnpj | kzCpfCnpj }}
+       </td>
+       <td class = "coluna">
+           {{fornecedor.telefoneWithoutTipo}}
+       </td>
+       <td class = "coluna coluna-email" >
+           {{fornecedor.email}}
+       </td>
+       <td class = "coluna">
+           {{fornecedor.cidade}}
+       </td>
+       <td class = "coluna" >
+           <div style="display: block; width: 126px">
+               <a   [routerLink]="[fornecedor.id, 'edit']"class="btn btn-info btn-sm mr-2">Editar</a>
+               <button  (click)="deleteResource(fornecedor)"class="btn btn-danger btn-sm">Excluir</button>
+           </div>
+       </td>
+   </tr>
+</tbody> 
+</table>
