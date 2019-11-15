@@ -23,6 +23,7 @@ import { CargoSelectorComponent } from './components/cargo-selector/cargo-select
 import { MomentDateAdapter } from '@angular/material-moment-adapter';
 import { KzCpfCnpjPipe } from './pipe/cnpj-cpf-format.pipe';
 import { CategoriaSelectorComponent } from './components/categoria-selector/categoria-selector.component';
+import { IMaskModule } from 'angular-imask';
 
 export const MY_FORMATS = {
   parse: {
@@ -65,6 +66,7 @@ registerLocaleData(localePt);
     MatInputModule,
     MatDatepickerModule,
     MatProgressSpinnerModule,
+    IMaskModule,
   ],
   exports:[
     CommonModule,
@@ -77,6 +79,7 @@ registerLocaleData(localePt);
     MatDatepickerModule,
     MatCheckboxModule,
     MatProgressSpinnerModule,
+    IMaskModule,
     
     BreadCrumbComponent,
     PageHeaderComponent,

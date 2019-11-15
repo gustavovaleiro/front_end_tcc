@@ -3,6 +3,7 @@ import { FormControl } from '@angular/forms';
 import { startWith, map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { ESTADOS, EstadoBase } from '../../models/municipios.dados';
+import { GetErrorMessage } from '../form-field-error/error-message';
 
 @Component({
   selector: 'app-cidade-selector',
@@ -12,11 +13,10 @@ import { ESTADOS, EstadoBase } from '../../models/municipios.dados';
 export class CidadeSelectorComponent implements OnInit {
   @Input() ufFormControl: FormControl;
   @Input() cidadeFormControl: FormControl;
-
   public estados: string[];
   cidadesFiltradas: Observable<string[]>;
   
-  constructor() { }
+  constructor( private errorMessage: GetErrorMessage) { }
  
   
   get cidades(): string[] {
@@ -58,10 +58,12 @@ export class CidadeSelectorComponent implements OnInit {
   }
 
  getErrorMessage(){
-  if(this.cidadeFormControl.touched && this.cidadeFormControl.dirty && this.ufFormControl.disabled  
-      && this.cidadeFormControl.value && !this.cidadeValida(this.ufFormControl.value.nome, this.cidadeFormControl.value)){
+  if(this.cidadeFormControl.touched && this.cidadeFormControl.dirty && !this.ufFormControl.disabled  
+      && !this.cidadeValida(this.ufFormControl.value.nome, this.cidadeFormControl.value)){
         this.cidadeFormControl.setErrors({'incorrect': true});
         return "Escolha uma cidade valida!"
+  }else if (this.cidadeFormControl.errors){
+    return this.errorMessage.getErrorMessage(this.cidadeFormControl);
   }
   return null;
 }
@@ -70,7 +72,11 @@ private estadoValido(estado: string):boolean{
   return ESTADOS.findIndex( est => est.nome == estado) != -1;
 }
 private cidadeValida(estado: string, cidade: string):boolean{
-  return ESTADOS.find( est => est.nome == estado).cidades.findIndex(cid => cid == cidade)  != -1;
+  
+  const _estado = ESTADOS.find(est => est.nome === estado);
+  if(!_estado || !estado || !cidade)
+    return false;
+  return _estado.cidades.findIndex(cid => cid === cidade)  != -1;
 }
 
   private _filterCidades(value: string): string[] {

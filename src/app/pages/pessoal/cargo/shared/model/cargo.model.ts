@@ -5,7 +5,7 @@ export class Cargo extends BaseResourceModel{
 
         public nomeCargo?: string,
         public descricao?:string,
-        public salarioBase?: string,
+        public salarioBase?: number,
     ){
        super();
     }

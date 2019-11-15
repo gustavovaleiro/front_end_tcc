@@ -3,23 +3,38 @@
     border-top: 1px solid #575787;
 }
 .no{
-  
-   min-height: 20px!important;
+    color: rgb(0, 55, 161) ;
+    min-height: 20px!important;
     max-height: 38px!important;
 }
 .no:hover{
-    background: #007bff;
-    color:white;
+    background: #007bff4f;
+    color: rgb(0, 25, 130) ;
+    cursor: pointer;
+    font-weight: 700!important;
 }
 .no-expandivel{
-    color: #343464;
-    font-weight: 700!important;
+    
+    font-weight: 600!important;
   
+}
+.active{
+
+    color: #007bff!important;
+   
+}
+.active a{
+    font-weight: 900!important;
+}
+.active:hover{
+    
+    font-weight: 900!important;
+
 }
 
 .no-naoexpandivel{
-    color: #446;
-    font-weight: 500!important;
+   
+    font-weight: 400!important;
 
 }
 

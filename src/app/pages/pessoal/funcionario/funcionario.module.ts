@@ -15,7 +15,7 @@ import { IMaskModule } from 'angular-imask';
     SharedModule,
     PessoaModule,
     FuncionarioRoutingModule,
-    IMaskModule,
+    
   ]
 })
 export class FuncionarioModule { }

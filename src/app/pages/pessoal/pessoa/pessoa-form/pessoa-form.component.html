@@ -16,13 +16,13 @@
         <div class="divider"></div>
         <div class="pessoa-info pessoa-fisica" *ngIf="resourceForm.get('tipo').value == 'PESSOA_FISICA'">
             <div class="row">
-                <div class="col-md-4 col-cpf">
+                <div class="col-md-5 col-cpf">
                         <mat-form-field>
                             <input matInput  placeholder="CPF" [formControl]="resourceForm.get('cpf')" autocomplete="off" spellcheck="false">
                             <mat-error >{{errorMessage.getErrorMessage(resourceForm.get('cpf'))}}</mat-error>
                         </mat-form-field>
                     </div>
-                <div class="col-md-8 col-nome">
+                <div class="col-md-7 col-nome">
                     <mat-form-field>
                         
                         <input matInput placeholder="Nome" [formControl]="resourceForm.get('nome')" autocomplete="off" spellcheck="false">
@@ -75,13 +75,13 @@
         </div><!--Fim de pessoa fisica-->
         <div class="pessoa-info pessoa-juridica" *ngIf="resourceForm.get('tipo').value == 'PESSOA_JURIDICA'">
             <div class="row">
-                <div class="col-md-6 col-cnpj">
+                <div class="col-md-5 col-cnpj">
                     <mat-form-field>
                         <input matInput placeholder="CNPJ" [formControl]="resourceForm.get('cnpj')"> 
                         <mat-error >{{errorMessage.getErrorMessage(resourceForm.get('cnpj'))}}</mat-error>
                     </mat-form-field> 
                 </div>
-                <div class="col-md-6 col-nome-fantasia">
+                <div class="col-md-7 col-nome-fantasia">
                     <mat-form-field>
                         <input matInput placeholder="Nome Fantasia" [formControl]="resourceForm.get('nome')">
                         <mat-error >{{errorMessage.getErrorMessage(resourceForm.get('nome'))}}</mat-error>

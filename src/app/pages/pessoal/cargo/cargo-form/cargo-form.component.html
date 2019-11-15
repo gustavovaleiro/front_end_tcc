@@ -1,0 +1,51 @@
+  
+<app-bread-crumb 
+[items]="[{text: 'Cargos', link: '/cargos'},
+        {text: pageTitle}]">
+</app-bread-crumb>
+
+<app-page-header
+[page-title]= "pageTitle"
+button-text = "<< Voltar"
+button-link = "/cargos"
+button-class = "btn-light"
+></app-page-header>
+
+<form  class = "form" [formGroup]="resourceForm"(submit)="submitForm()" autocomplete="off" spellcheck="false">
+
+<app-server-error-message [server-error-messages] = "serverErrorMessages"></app-server-error-message>
+<div class="card">
+<div class="card-header sub-header-white">
+    <h1 class = "h5">Informações do cargo:</h1>
+</div>
+<div class="card-body">
+    <div class="row">
+        <div class="c col-md-2">
+            <mat-form-field>
+                <input matInput placeholder="Nome" [formControl]="resourceForm.get('nomeCargo')" autocomplete="off" spellcheck="false">
+                <mat-error >{{errorMessage.getErrorMessage(resourceForm.get('nomeCargo'))}}</mat-error>
+            </mat-form-field>
+        </div>
+        <div class="c col-md-2">
+            <mat-form-field>
+                <input matInput  [imask]="imaskConfig"  placeholder="Salário Base" [formControl]="resourceForm.get('salarioBase')" autocomplete="off" spellcheck="false">
+                <span matPrefix>R$&nbsp;</span>
+                <mat-error >{{errorMessage.getErrorMessage(resourceForm.get('salarioBase'))}}</mat-error>
+            </mat-form-field>
+        </div>
+        <div class="c col-md-7">
+            <mat-form-field>
+                <input matInput placeholder="Descrição" [formControl]="resourceForm.get('descricao')" autocomplete="off" spellcheck="false">
+                <mat-error >{{errorMessage.getErrorMessage(resourceForm.get('descricao'))}}</mat-error>
+            </mat-form-field>
+        </div>
+    </div>
+</div>
+</div>
+
+<div style="width: fit-content;margin: 0 auto">
+    <button [disabled] ="submittingForm " type="submit"  class = "btn btn-primary btn-lg mt-2 " >Salvar</button>
+</div>
+ {{this.resourceForm.value|json}}
+</form>
+

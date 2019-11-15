@@ -6,6 +6,7 @@ import { debounceTime, tap, switchMap, finalize, distinctUntilChanged, map, catc
 import { filter } from 'minimatch';
 import { of } from 'rxjs';
 import { MatAutocompleteSelectedEvent } from '@angular/material';
+import { GetErrorMessage } from '../form-field-error/error-message';
 
 @Component({
   selector: 'app-cargo-selector',
@@ -14,12 +15,12 @@ import { MatAutocompleteSelectedEvent } from '@angular/material';
 })
 export class CargoSelectorComponent implements OnInit {
 
-  filteredCargo: Cargo[] = [];
+  filteredCargo: Cargo[] = []; 
   @Input() formControlId: FormControl;
   @Input() formControlNome: FormControl; 
   isLoading = false;
    
-  constructor( private cargoService: CargoService) {}
+  constructor( private cargoService: CargoService, private errorMessage: GetErrorMessage) {}
   ngOnInit() {
     this.formControlNome
     .valueChanges
@@ -49,10 +50,13 @@ export class CargoSelectorComponent implements OnInit {
 
   }
   getErrorMessage(){
+
     if(this.formControlNome.touched && this.formControlNome.dirty 
-      && this.formControlNome.value && !this.existeCargo(this.formControlNome.value)){
+       && (!this.existeCargo(this.formControlNome.value)  || this.formControlNome.invalid)){
         this.formControlNome.setErrors({'incorrect': true});
         return "Escolha um cargo valido!"
+  } else if (this.formControlNome.errors){
+    return this.errorMessage.getErrorMessage(this.formControlNome);
   }
   return null;
   }

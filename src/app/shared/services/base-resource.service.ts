@@ -16,24 +16,20 @@ export abstract class BaseResourceService<T extends BaseResourceModel> {
 		this.http = injector.get(HttpClient);
 	}
 	
-	
 	getAllPage(): Observable<any[]>{
 		return this.http.get(this.apiPath+"/page").pipe(
 			map(this.jsonDataToResourcesPage.bind(this)),
 			catchError(this.handleError)
 		)
 	}
-
 	getById(id): Observable<T>{
 		const url = `${this.apiPath}/${id}`
-
 		return this.http.get(url).pipe(
 			map(this.jsonDataToResource.bind(this)),
 			catchError(this.handleError)
 		)
 	}
 	create(resource: T): Observable<T>{
-
 		return  this.http.post(this.apiPath, resource,   { observe: 'response' }).pipe(
 			map(response =>{
 				let location = response.headers.get('Location');
@@ -51,7 +47,6 @@ export abstract class BaseResourceService<T extends BaseResourceModel> {
 			map(()=>resource)
 		);
 	}
-		
 	delete(id: number): Observable<any>{
 		const url= `${this.apiPath}/${id}`;
 		return this.http.delete(url).pipe(
@@ -59,8 +54,6 @@ export abstract class BaseResourceService<T extends BaseResourceModel> {
 			map(()=>null)
 			);
 	}
-
-
 	protected jsonDataToResourcesPage(jsonData: any): T[]{
 		console.log(jsonData);
 		const resources: T[] =[];
@@ -68,13 +61,11 @@ export abstract class BaseResourceService<T extends BaseResourceModel> {
 			resources.push(this.jsonDataToResourceDTOfn(element));
 		});
 		return resources;
-	  }
-  
-	  protected jsonDataToResource(jsonData: any): T{
-		return this.jsonDataToResourcefn(jsonData);
-	  }
-			
-	  protected handleError(error: any[]): Observable<any>{
+	}
+	protected jsonDataToResource(jsonData: any): T{
+	return this.jsonDataToResourcefn(jsonData);
+	}
+	protected handleError(error: any[]): Observable<any>{
 	  console.log("erro na requisição ->", error);
 	  return throwError(error);
 	}

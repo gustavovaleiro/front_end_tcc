@@ -1,4 +1,4 @@
- 
+  
 <app-bread-crumb 
         [items]="[{text: 'Funcionarios', link: '/funcionarios'},
                 {text: pageTitle}]">
@@ -48,7 +48,7 @@
                 </div>
                 <div class="c col-md-2">
                     <mat-form-field>
-                        <input matInput [imask]="imaskConfig" type="number" placeholder="Adcional Pessoal" [formControl]="resourceForm.get('adicionalPessoal')" autocomplete="off" spellcheck="false">
+                        <input matInput [imask]="imaskConfig"  [unmask]="true" placeholder="Adcional Pessoal" [formControl]="resourceForm.get('adicionalPessoal')" autocomplete="off" spellcheck="false">
                         <span matPrefix>R$&nbsp;</span>
                         <mat-error >{{errorMessage.getErrorMessage(resourceForm.get('adicionalPessoal'))}}</mat-error>
                     </mat-form-field>

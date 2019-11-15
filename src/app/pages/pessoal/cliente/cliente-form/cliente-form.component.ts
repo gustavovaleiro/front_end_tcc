@@ -7,6 +7,7 @@ import { Cliente } from '../shared/model/cliente.model';
 import { ClienteService } from '../shared/service/cliente.service';
 import { PessoaFormComponent } from '../../pessoa/pessoa-form/pessoa-form.component';
 import { FormGroup } from '@angular/forms';
+import { IMaskModule } from 'angular-imask';
 
 
 
@@ -69,7 +70,7 @@ export class ClienteFormComponent extends BaseResourceFormComponent<Cliente> imp
   }
   protected createResource(){
     let  cliente = this.getClienteFromForm();
-  
+    
     this.resourceService.create(cliente).subscribe(
       (cliente) =>this.actionsForSuccess(cliente),
       (error) => this.actionsForError(error)
@@ -77,6 +78,7 @@ export class ClienteFormComponent extends BaseResourceFormComponent<Cliente> imp
   }
   protected updateResource(){
     let  cliente = this.getClienteFromForm();
+    
     this.resourceService.update(cliente).subscribe(
       (cliente) => this.actionsForSuccess(cliente),
       (error) => this.actionsForError(error)

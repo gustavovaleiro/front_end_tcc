@@ -9,7 +9,7 @@ import { PessoaService } from '../../pessoal/pessoa/shared/pessoa.service';
 })
 export class BaseComponent implements OnInit {
 
-  constructor(catS: PessoaService) { 
+  constructor() { 
     
   }
 

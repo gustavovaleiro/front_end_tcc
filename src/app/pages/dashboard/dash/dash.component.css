@@ -2,6 +2,8 @@
     width: 100%;
     max-width: 100%;
     margin: 8px;
+    height: 100%;
+    box-shadow: 2px 2px 4px 1px rgba(102,102,102,1);
 }
 .card-body{
 
@@ -9,13 +11,23 @@
 .card-header{
     background: white;
     color: #009FE0 ;
+    width: 100%;
 }
 
 h2{
     margin-bottom: 0px;
 }
 .container{
-    margin: 10px;
-    margin-top: 32px;
-    
+    margin: 0 10px;
+    height: 100%;
+
+}
+.row{
+    padding-bottom: 15px;
+}
+.linha01{
+    height: 50%;
+}
+.linha02{
+    height: 50%;
 }

@@ -10,7 +10,7 @@ import { map, catchError } from 'rxjs/operators';
     providedIn: 'root'
   })
 export class CargoService extends BaseResourceService<Cargo> {
-    constructor(protected http: HttpClient, protected injector: Injector, private pessoaService: PessoaService){
+    constructor(protected http: HttpClient, protected injector: Injector){
         super(API_CONFIG.baseUrl+"/cargos", injector, Cargo.fromJson, Cargo.fromJson)
     }
 
@@ -22,3 +22,4 @@ export class CargoService extends BaseResourceService<Cargo> {
 		)
 	} 
 }
+

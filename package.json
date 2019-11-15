@@ -33,6 +33,7 @@
     "jquery": "^3.4.1",
     "mdbootstrap": "^4.8.10",
     "moment": "^2.24.0",
+    "ng2-charts": "^2.3.0",
     "primeicons": "^2.0.0",
     "primeng": "^8.0.2",
     "rxjs": "~6.4.0",

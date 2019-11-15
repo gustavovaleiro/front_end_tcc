@@ -1,12 +1,15 @@
 <div *ngIf="concluido">
 
-  <mat-tree class = "arvore menu-background-color"  [dataSource]="dataSource" [treeControl]="treeControl" style = "height: 100%">
+  <mat-tree class = "arvore menu-background-color nav"  [dataSource]="dataSource" [treeControl]="treeControl" style = "height: 100%">
    
     <!-- This is the tree node template for leaf nodes -->
-    <mat-tree-node class = "no no-naoexpandivel"  *matTreeNodeDef="let node" matTreeNodePadding matTreeNodePaddingIndent="12px">
+    <mat-tree-node class = "no no-naoexpandivel" (click)="navigateTo(node.name)"  [class.active] = "canActiveClass(node.name)" *matTreeNodeDef="let node" matTreeNodePadding matTreeNodePaddingIndent="12px">
      
       <button mat-icon-button disabled style = "max-width: 20px"></button>
-      {{node.name}}
+      <div class="nav-item">
+        <a   class="nav-link"  >    {{node.name}} </a>
+        </div>
+
     </mat-tree-node>
     <!-- This is the tree node template for expandable nodes  -->
     <mat-tree-node matTreeNodeToggle
@@ -16,7 +19,9 @@
           {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
         </mat-icon>
       </button>
-       {{node.name}} 
+      <div class="nav-item"><a class="nav-link">{{node.name}}</a></div>
+      
+   
     </mat-tree-node>
   </mat-tree>
   

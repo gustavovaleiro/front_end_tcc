@@ -1,12 +1,3 @@
-.btn-group{
-    width: 100%;
-    max-width: 600px;
-    margin: 0 auto;
-}
-.col-tipo{
-    
-}
-
 
 .btn-tipo{
   margin-bottom: 16px;
@@ -20,9 +11,7 @@
     margin-bottom: 12px;
 }
 
-.pessoa-fisica{
-    margin-top: 20px;
-}
+
 mat-form-field{
     width: 100%;
 }

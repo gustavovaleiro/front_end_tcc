@@ -12,11 +12,9 @@ import { map, catchError } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class PessoaService extends BaseResourceService<Pessoa> { 
-  
   constructor( protected injector: Injector) {
      super(API_CONFIG.baseUrl+"/pessoas", injector, Pessoa.fromJson);
   }
-
   getByDocument(valor: string): Observable<Pessoa>{
     const url = `${this.apiPath}/findBy?document=${valor}`;
     return this.http.get(url).pipe(
@@ -24,10 +22,7 @@ export class PessoaService extends BaseResourceService<Pessoa> {
       catchError(this.catchErrorByDocument)
       )
   }
-
   catchErrorByDocument(error: any[]): Observable<any>{
     return throwError(error)
   }
-
-
 }

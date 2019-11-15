@@ -3,6 +3,8 @@ import {FlatTreeControl, CdkTreeNodeDef} from '@angular/cdk/tree';
 import {MatTreeFlatDataSource, MatTreeFlattener} from '@angular/material/tree';
 import { allPageInfos, TipoFuncao, Modulo, PageInfos } from 'src/app/pages/login/shared/models/pageinfos';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+import { Route } from '@angular/compiler/src/core';
+import { Router, ActivatedRoute } from '@angular/router';
 
 
 /**
@@ -44,16 +46,14 @@ export class NavTreeComponent   {
       this._transformer, node => node.level, node => node.expandable, node => node.children);
 
   dataSource = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener);
-  constructor() {
+  constructor(private router: Router, private route: ActivatedRoute) {
     
     this.dataSource.data = [];
     let vetor_buffer: FoodNode[] = [];
     allPageInfos.forEach( pageInfo => {
-      console.log("começando")
       if(pageInfo.tipo == TipoFuncao.PRINCIPAL){ // se a função nao é auxiliar
        
        if(this.existeNode(pageInfo.modulo.toString(), vetor_buffer)){ // se ja existe o modulo 
-          console.log("Ja existe no");
           this.adicionaNoPrincipal(pageInfo.modulo.toString(), pageInfo.nome,vetor_buffer);  // adiciona o nó da função ao nó do modulo
        }else{ // SE NAO EXISTE O MODULO, 
           this.criaModulo(vetor_buffer,pageInfo.modulo.toString());
@@ -72,11 +72,6 @@ export class NavTreeComponent   {
     })
     this.dataSource.data = vetor_buffer;
     this.concluido=true;
-   // jA TA CRIANDO A ESTRUTURA MAIS OU MENOS O QUE EU QUERO, SÓ N IDENTIFIQUEI PQ Q AINDA N TA RENDERIZANDO
-     
-    console.log(this.concluido)
-    console.log(this.dataSource.data);
-    console.log();
   }
  
   hasChild = (_: number, node: ExampleFlatNode) => node.expandable;
@@ -110,6 +105,19 @@ export class NavTreeComponent   {
   }
   private adicionaNome(filho: any, nome: string) {
     filho.push({ name: nome});
+  }
+
+  private navigateTo(nome: string){
+    let link = this.getRecursoByNome(nome);
+    console.log(link)
+    this.router.navigate(['/'+link]);
+  }
+  private getRecursoByNome(nome: string): string{
+    return allPageInfos.find( el => el.nome === nome).recurso;
+  }
+  private canActiveClass(nome: string){
+    console.log()
+    return this.route.snapshot._urlSegment.segments[0].path ===  this.getRecursoByNome(nome)
   }
 }
 

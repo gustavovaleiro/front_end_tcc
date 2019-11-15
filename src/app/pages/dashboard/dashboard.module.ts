@@ -3,13 +3,16 @@ import { CommonModule } from '@angular/common';
 
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { DashComponent } from './dash/dash.component';
+import { ExamplecardComponent } from './examplecard/examplecard.component';
+import { ChartsModule } from 'ng2-charts';
 
 
 @NgModule({
-  declarations: [DashComponent],
+  declarations: [DashComponent, ExamplecardComponent],
   imports: [
     CommonModule,
-    DashboardRoutingModule
+    DashboardRoutingModule,
+    ChartsModule
   ],
   exports:[
     

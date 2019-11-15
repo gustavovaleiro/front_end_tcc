@@ -21,7 +21,7 @@
             <div class="row">
                 <div class="col-md-4">
                     <mat-form-field>
-                        <input [imask]="imaskConfig" matInput placeholder="Limite de crédito:" [formControl]="resourceForm.get('limiteCompra')">
+                        <input [imask]="imaskConfig"  [unmask]="true"matInput placeholder="Limite de crédito:" [formControl]="resourceForm.get('limiteCompra')">
                         <span matPrefix>R$&nbsp;</span>
                         <mat-error >{{getErrorMessage(resourceForm.get('limiteCompra'))}}</mat-error>
                     </mat-form-field>

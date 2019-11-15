@@ -17,7 +17,7 @@ export abstract class BaseResourceFormComponent<T extends BaseResourceModel> imp
     pageTitle: string;
     serverErrorMessages: string[] = null;
     submittingForm: boolean = false;
-    public errorMessage: GetErrorMessage = new GetErrorMessage();
+    public errorMessage: GetErrorMessage;
     protected route: ActivatedRoute;
     protected router: Router;
     protected formBuilder: FormBuilder;
@@ -30,6 +30,7 @@ export abstract class BaseResourceFormComponent<T extends BaseResourceModel> imp
         this.formBuilder = this.injector.get(FormBuilder);
         this.router = this.injector.get(Router);
         this.route = this.injector.get(ActivatedRoute);
+        this.errorMessage = this.injector.get(GetErrorMessage)
     }
 
     ngOnInit() {
@@ -68,7 +69,7 @@ export abstract class BaseResourceFormComponent<T extends BaseResourceModel> imp
 
     protected createResource() {
         const resource: T = this.jsonDataToResourceFn(this.resourceForm.value);
-      
+        console.log(resource)
         this.resourceService.create(resource).subscribe(
             (resource) => 
                 this.actionsForSuccess(resource),
@@ -78,7 +79,7 @@ export abstract class BaseResourceFormComponent<T extends BaseResourceModel> imp
     }
     protected updateResource() {
         const resource: T = this.jsonDataToResourceFn(this.resourceForm.value);
-       
+     
         this.resourceService.update(resource).subscribe(
             resource => this.actionsForSuccess(resource),
             error => this.actionsForError(error)
