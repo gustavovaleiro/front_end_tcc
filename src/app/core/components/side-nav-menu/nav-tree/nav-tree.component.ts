@@ -117,7 +117,8 @@ export class NavTreeComponent   {
   }
   private canActiveClass(nome: string){
     console.log()
-    return this.route.snapshot._urlSegment.segments[0].path ===  this.getRecursoByNome(nome)
+    
+    return this.router.url.split("/"+nome)[0].startsWith("/"+this.getRecursoByNome(nome))
   }
 }
 

@@ -19,7 +19,7 @@ export class CargoService extends BaseResourceService<Cargo> {
 		return this.http.get(url).pipe(
 			map(this.jsonDataToResourcesPage.bind(this)),
 			catchError(this.handleError)
-		)
+		) 
 	} 
 }
 

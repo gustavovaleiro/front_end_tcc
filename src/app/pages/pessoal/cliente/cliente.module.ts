@@ -13,7 +13,7 @@ import { ClienteListComponent } from './cliente-list/cliente-list.component';
     SharedModule,
     PessoaModule,
     ClienteRoutingModule,
-    IMaskModule,
+    IMaskModule, 
     
   ]
 })

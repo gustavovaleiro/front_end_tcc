@@ -40,14 +40,14 @@ export class CargoFormComponent extends BaseResourceFormComponent<Cargo> impleme
               console.log("this", this.resource)
             }, (error) => alert('Ocorreu um erro no servidor, tente mais tarde.')
         );
-    }
+    } 
   }
   
   protected buildResourceForm(){
     this.resourceForm = this.formBuilder.group({
       id: [null],
       nomeCargo: [null, Validators.required],
-      salarioBase: [null, Validators.required],
+      salarioBase: [null],
       descricao: [null, Validators.required],
     });
     

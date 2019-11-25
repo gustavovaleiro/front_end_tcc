@@ -14,3 +14,4 @@ export class Cargo extends BaseResourceModel{
         return  Object.assign(new Cargo(), jsonData)
     }
 }
+ 

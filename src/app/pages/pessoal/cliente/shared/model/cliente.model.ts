@@ -17,7 +17,7 @@ export class Cliente extends BaseResourceModel{
     static fromJson(jsonData: any): Cliente{
         return  Object.assign(new Cliente(), jsonData)
     }
-}
+} 
 
 export class ClienteListDTO extends BaseResourceModel{
    

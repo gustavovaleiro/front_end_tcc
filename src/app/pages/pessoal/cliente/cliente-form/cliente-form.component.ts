@@ -1,4 +1,4 @@
-import { Component, Injector, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, Injector, OnInit, ViewChild } from '@angular/core';
 
 import { BaseResourceFormComponent } from 'src/app/shared/components/base-resource-form/base-resource-form.component';
 import { switchMap } from 'rxjs/operators';
@@ -6,11 +6,10 @@ import { switchMap } from 'rxjs/operators';
 import { Cliente } from '../shared/model/cliente.model';
 import { ClienteService } from '../shared/service/cliente.service';
 import { PessoaFormComponent } from '../../pessoa/pessoa-form/pessoa-form.component';
-import { FormGroup } from '@angular/forms';
-import { IMaskModule } from 'angular-imask';
 
 
 
+ 
 @Component({
 
   selector: 'app-cliente-form',

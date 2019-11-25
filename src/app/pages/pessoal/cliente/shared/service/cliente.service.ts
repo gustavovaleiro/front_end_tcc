@@ -13,7 +13,7 @@ export class ClienteService extends BaseResourceService<Cliente> {
     constructor(protected http: HttpClient, protected injector: Injector, private pessoaService: PessoaService){
         super(API_CONFIG.baseUrl+"/clientes", injector, Cliente.fromJson, ClienteListDTO.fromJson)
     }
-
+ 
 
     create(resource: Cliente):Observable<Cliente>{
         if(resource.pessoa.id != null && resource.pessoa.id > 0){
