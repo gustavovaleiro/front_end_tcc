@@ -5,6 +5,7 @@
 }
 .row-conteudo{
     height: 100vh;
+    margin: 0 auto;
 }
 .menu{
     padding: 0px !important;
@@ -35,7 +36,7 @@
 
 
 .menu{
-    max-width: 256px;
+
     max-height: 100%;
     padding: 0px !important;
     background: rgba(12,60,232,1);

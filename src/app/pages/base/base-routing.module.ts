@@ -8,7 +8,8 @@ const routes: Routes = [ {path: '', component: BaseComponent, children:[
                             {path: "clientes", loadChildren: "../pessoal/cliente/cliente.module#ClienteModule"},
                             {path: "fornecedores", loadChildren: "../pessoal/fornecedor/fornecedor.module#FornecedorModule"},
                             {path: "funcionarios", loadChildren: "../pessoal/funcionario/funcionario.module#FuncionarioModule"},
-                            {path: "cargos", loadChildren: "../pessoal/cargo/cargo.module#CargoModule"}
+                            {path: "cargos", loadChildren: "../pessoal/cargo/cargo.module#CargoModule"},
+                            {path: "categorias", loadChildren: "../estoque/categoria-item/categoria-item.module#CategoriaItemModule"}
 
                           ]},
                         

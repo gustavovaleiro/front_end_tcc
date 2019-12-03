@@ -27,6 +27,7 @@ export class AuthService{
     }
 
     sucessfulLogin(authorizationValue: string){
+        console.log(authorizationValue)
         let tok = authorizationValue.substring(7);
         this.getPermissoes().subscribe( response => {
             let user : LocalUser = {

@@ -1,0 +1,9 @@
+.table{
+    margin-bottom: 32px;
+}
+
+.coluna{
+    max-width: 220px!important;
+    overflow: hidden;
+    box-sizing: border-box;
+}

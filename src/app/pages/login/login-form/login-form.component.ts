@@ -41,6 +41,7 @@ export class LoginFormComponent {
   login (){
     this.cred = this.getCredFromForm();
     this.auth.authenticate(this.cred).subscribe(response=> {
+       console.log(response.headers)
        this.auth.sucessfulLogin(response.headers.get('Authorization'))
        this.router.navigate(['dash']);
     }, error => console.log(error))
